@@ -6,7 +6,7 @@ class User(models.Model):
     first_name = models.CharField(max_length=55)
     last_name = models.CharField(max_length=55)
     email_address = models.EmailField(max_length=100)
-    phone_number = models.IntegerField(max_length=15)
+    phone_number = models.IntegerField(null=True)
     barangay = models.CharField(max_length=100)
     municipality_or_city = models.CharField(max_length=100)
     region = models.CharField(max_length=100)
@@ -23,7 +23,7 @@ class Store(models.Model):
    store_name = models.CharField(max_length=255)
    store_owner = models.OneToOneField(User,on_delete=models.CASCADE,related_name='store')
    store_profile = models.ImageField(upload_to='store_profiles/')
-   contact_number = models.IntegerField(max_length=15)
+   contact_number = models.IntegerField(null=True)
    store_address = models.CharField(max_length=255)
    store_creation_date = models.DateTimeField(auto_now_add=True)
    store_description = models.TextField()
@@ -73,7 +73,7 @@ class Orders(models.Model):
 
     customer = models.OneToOneField(User,on_delete=models.CASCADE,related_name='orders')
     total_amount = models.PositiveIntegerField()
-    order_status = models.CharField(choices=STATUS,default="PENDING")
+    order_status = models.CharField(choices=STATUS,default="PENDING", max_length=255)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now_add=True,null=True)
 

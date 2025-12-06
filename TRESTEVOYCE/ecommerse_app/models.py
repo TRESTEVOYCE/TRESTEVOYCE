@@ -9,6 +9,7 @@ class User(models.Model):
     phone_number = models.IntegerField(null=True)
     barangay = models.CharField(max_length=100)
     municipality_or_city = models.CharField(max_length=100)
+    province = models.CharField(max_length=100,null=True,blank=True)
     region = models.CharField(max_length=100)
     is_seller = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)

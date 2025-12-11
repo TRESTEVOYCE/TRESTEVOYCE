@@ -34,14 +34,14 @@ class Store(models.Model):
    
 class Product(models.Model):
 
-    prodcut_name = models.CharField(max_length=100)
+    product_name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10,decimal_places=2)
     product_image = models.ImageField(upload_to='product_images/')
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
     product_description = models.TextField()
 
     def __str__(self):
-        return self.prodcut_name,self.price
+        return self.product_name,self.price
 
 class Inventory(models.Model):
 

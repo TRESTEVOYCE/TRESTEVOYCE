@@ -29,12 +29,19 @@
         <main class="main-content">
             <!-- Top Header -->
             <header class="top-header">
-                <div class="welcome">Welcome back!</div>
-                <div class="top-icons">
-                    <span class="notification-bell">🔔</span>
-                    <span class="user-profile">👤</span>
+                <!-- Dynamic Page Title -->
+                <div class="page-title" id="page-title">Dashboard Overview</div>
+
+                <!-- Welcome and Profile -->
+                <div class="welcome-section">
+                    <div class="welcome">Welcome back!</div>
+                    <div class="top-icons">
+                        <span class="notification-bell">🔔</span>
+                        <span class="user-profile">👤</span>
+                    </div>
                 </div>
             </header>
+
 
             <!-- Page-specific content -->
             {% block content %}{% endblock %}

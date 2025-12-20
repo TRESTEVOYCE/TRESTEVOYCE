@@ -1,10 +1,15 @@
-// ---------- Sidebar menu active highlight ----------
+// Sidebar menu items
 const menuItems = document.querySelectorAll('.sidebar ul.menu li');
+const pageTitle = document.getElementById('page-title');
 
 menuItems.forEach(item => {
     item.addEventListener('click', () => {
+        // Remove active class from all
         menuItems.forEach(i => i.classList.remove('active'));
+        // Add active class to clicked item
         item.classList.add('active');
+        // Update page title
+        pageTitle.textContent = item.textContent.trim();
     });
 });
 

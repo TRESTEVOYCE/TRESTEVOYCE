@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/customer/home.css' %}">
+</head>
+<body id="home-top">
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <div class="logo" onclick="closeDisplay()">
+    <span>Trestevoyce</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#home-top" onclick="closeDisplay()">Home</a></li>
+    <li><a href="#shop-all" onclick="closeDisplay()">Shop</a></li>
+    <li><a href="#new-arrivals" onclick="closeDisplay()">New Arrivals</a></li>
+    <li><a href="#flash-deals" onclick="closeDisplay()">Sale</a></li>
+  </ul>
+
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Search brands, products...">
+    <i class="fa fa-search" onclick="triggerSearch()"></i>
+  </div>
+
+  <div class="nav-icons">
+    <div class="icon-wrapper" onclick="toggleSidebar('wishlist-sidebar')">
+      <i class="fa-regular fa-heart"></i>
+      <span class="badge" id="wish-badge">0</span>
+    </div>
+    <div class="icon-wrapper" onclick="toggleSidebar('cart-sidebar')">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="badge" id="cart-badge">0</span>
+    </div>
+    <div class="icon-wrapper" onclick="toggleSidebar('profile-sidebar')">
+      <i class="fa-regular fa-circle-user"></i>
+    </div>
+  </div>
+
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+</nav>
+
+<div class="sidebar-overlay" id="overlay" onclick="closeAllSidebars()"></div>
+
+<!-- HERO SECTION -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>Find it, Love it, <br> Buy it</h1>
+    <button class="btn-shop-now" onclick="location.href='#shop-all'">Shop Now</button>
+  </div>
+</header>
+
+<main class="main-container">
+  <!-- SHOP ALL -->
+  <div class="page-title" id="shop-all">
+    <h2>Shop All Products</h2>
+    <p>Discover our curated collection of premium products</p>
+  </div>
+
+  <div class="category-filters">
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="clothing"><i class="fa-solid fa-shirt"></i> Clothing</button>
+    <button class="filter-btn" data-category="shoes"><i class="fa-solid fa-shoe-prints"></i> Shoes</button>
+    <button class="filter-btn" data-category="bags"><i class="fa-solid fa-bag-shopping"></i> Bags</button>
+    <button class="filter-btn" data-category="watches"><i class="fa-solid fa-clock"></i> Watches</button>
+  </div>
+
+  <!-- NEW ARRIVALS -->
+  <div class="section-box" id="new-arrivals">
+    <div class="section-title-row">
+      <h3>New Arrivals</h3>
+      <a href="#" class="see-all">See all <i class="fa-solid fa-chevron-right"></i></a>
+    </div>
+    <div class="product-grid">
+      {% for product in products %}
+        <div class="product-card">
+          <div class="img-wrapper">
+            {% if product.product_image %}
+              <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+            {% else %}
+              <img src="{% static 'images/default-product.png' %}" alt="No image">
+            {% endif %}
+            <div class="heart-btn"><i class="fa-regular fa-heart"></i></div>
+          </div>
+          <div class="info">
+            <h4>{{ product.product_name }}</h4>
+            <div class="price-row">
+              <span class="price">₱{{ product.price }}</span>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- FLASH DEALS -->
+  <div class="section-box" id="flash-deals">
+    <div class="section-title-row">
+      <h3>Flash Deals</h3>
+    </div>
+    <div class="product-grid">
+      {% for product in products %}
+        <div class="product-card">
+          <div class="img-wrapper">
+            {% if product.product_image %}
+              <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+            {% else %}
+              <img src="{% static 'images/default-product.png' %}" alt="No image">
+            {% endif %}
+            <div class="heart-btn"><i class="fa-regular fa-heart"></i></div>
+          </div>
+          <div class="info">
+            <h4>{{ product.product_name }}</h4>
+            <div class="price-row">
+              <span class="price">₱{{ product.price }}</span>
+              <button class="add-btn">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h2>Trestevoyce</h2>
+      <p>Curated premium fashion and lifestyle essentials. Quality meets style.</p>
+      <div class="footer-social">
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul class="footer-links">
+        <li><a href="#new-arrivals">New Arrivals</a></li>
+        <li><a href="#" onclick="openHelpCenterPage()">Contact us</a></li>
+        <li><a href="#flash-deals">Flash Sale</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul class="footer-links">
+        <li><a href="#" onclick="openHelpCenterPage()">Help Center</a></li>
+        <li><a href="#">Shipping & Returns</a></li>
+        <li><a href="#" onclick="openOrdersPage()">Track Order</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Stay Updated</h4>
+      <div class="newsletter-box">
+        <input type="email" placeholder="Email address">
+        <button>JOIN</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Trestevoyce. All rights reserved.</p>
+    <div class="footer-cards">
+      <i class="fa-brands fa-cc-visa"></i>
+      <i class="fa-brands fa-cc-mastercard"></i>
+      <i class="fa-brands fa-cc-paypal"></i>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
+
+
+</body>
+</html>

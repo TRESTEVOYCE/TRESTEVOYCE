@@ -1,0 +1,59 @@
+{% extends "vendor/base.html" %}
+{% load static %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/css/analytics.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="analytics-container">
+
+    <div class="analytics-grid">
+
+        <!-- Revenue Overview -->
+        <div class="card revenue-card">
+            <div class="card-header">
+                <h3>Revenue Overview</h3>
+            </div>
+
+            <div class="chart-placeholder">
+                <!-- Chart will be injected later -->
+                <span class="chart-icon">📊</span>
+                <p>Revenue chart will appear here</p>
+            </div>
+        </div>
+
+        <!-- Top Selling Products -->
+        <div class="card top-products-card">
+            <div class="card-header">
+                <h3>Top Selling Products</h3>
+            </div>
+
+            <ul class="top-products-list">
+                {% for product in top_products %}
+                <li>
+                    <div class="product-rank">#{{ forloop.counter }}</div>
+                    <div class="product-info">
+                        <span class="product-name">{{ product.name }}</span>
+                        <small>{{ product.total_sales }} sales</small>
+                    </div>
+                    <div class="product-revenue">
+                        ${{ product.total_revenue }}
+                    </div>
+                </li>
+                {% empty %}
+                <li class="no-data">No sales data available</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'vendor/js/analytics.js' %}"></script>
+{% endblock %}

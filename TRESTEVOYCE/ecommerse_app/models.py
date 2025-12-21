@@ -1,8 +1,6 @@
 from django.db import models
 
-# Create your models here.
 class User(models.Model):
-
     first_name = models.CharField(max_length=55)
     last_name = models.CharField(max_length=55)
     email_address = models.EmailField(max_length=100)
@@ -13,57 +11,56 @@ class User(models.Model):
     region = models.CharField(max_length=100)
     is_seller = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/')
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     
-
     def __str__(self):
-        return self.first_name, self.last_name
+        return f"{self.first_name} {self.last_name}"
+
 
 class Store(models.Model):
-   
-   store_name = models.CharField(max_length=255)
-   store_owner = models.OneToOneField(User,on_delete=models.CASCADE,related_name='store')
-   store_profile = models.ImageField(upload_to='store_profiles/')
-   contact_number = models.IntegerField(null=True)
-   store_address = models.CharField(max_length=255)
-   store_creation_date = models.DateTimeField(auto_now_add=True)
-   store_description = models.TextField()
+    store_name = models.CharField(max_length=255)
+    store_owner = models.OneToOneField(User,on_delete=models.CASCADE,related_name='store')
+    store_profile = models.ImageField(upload_to='store_profiles/', null=True, blank=True)
+    contact_number = models.IntegerField(null=True)
+    store_address = models.CharField(max_length=255)
+    store_creation_date = models.DateTimeField(auto_now_add=True)
+    store_description = models.TextField()
 
-   def __str__(self):
-       return self.store_name,self.store_owner
-   
+    def __str__(self):
+        return f"{self.store_name}"
+
+
 class Product(models.Model):
-
     product_name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10,decimal_places=2)
-    product_image = models.ImageField(upload_to='product_images/')
+    product_image = models.ImageField(upload_to='product_images/', null=True, blank=True)
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
     product_description = models.TextField()
 
     def __str__(self):
-        return self.product_name,self.price
+        return f"{self.product_name}"
+
 
 class Inventory(models.Model):
-
     product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
     stock_quantity = models.PositiveIntegerField(default=0)
-    last_updated = models.DateTimeField(auto_now_add=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product_id,self.stock_quantity
+        return f"{self.product_id} - {self.stock_quantity}"
+
 
 class Cart(models.Model):
-
     customer = models.OneToOneField(User,on_delete=models.CASCADE,related_name='cart')
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.customer ,self.product
+        return f"{self.customer} - {self.product}"
+
 
 class Orders(models.Model):
-
     STATUS = [
         ('PENDING','Pending'),
         ('SHIPPED','Shipped'),
@@ -79,10 +76,10 @@ class Orders(models.Model):
     updated_date = models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):
-        return self.customer , self.total_amount
+        return f"Order {self.id} - {self.customer}"
+
 
 class Ordered_Item(models.Model):
-
     order_id = models.ForeignKey(Orders,on_delete=models.CASCADE)
     product_id = models.ForeignKey(Product,on_delete=models.CASCADE)
     store_id = models.ForeignKey(Store,on_delete=models.CASCADE)
@@ -90,14 +87,14 @@ class Ordered_Item(models.Model):
     price_on_purchase = models.DecimalField(max_digits=10,decimal_places=2,default=0)
 
     def __str__(self):
-        return self.order_id , self.product_id
+        return f"{self.order_id} - {self.product_id}"
+
 
 class Sales(models.Model):
-
     store_id = models.OneToOneField(Store,on_delete=models.CASCADE,related_name='sales')
     ordered_item_id = models.OneToOneField(Ordered_Item,on_delete=models.CASCADE)
     total_earning = models.DecimalField(max_digits=10,decimal_places=2)
     creation_date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-            return self.store_id , self.total_earning
+        return f"{self.store_id} - {self.total_earning}"

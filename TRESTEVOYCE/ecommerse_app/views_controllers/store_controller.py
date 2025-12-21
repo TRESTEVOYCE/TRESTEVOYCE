@@ -1,84 +1,81 @@
-from django.http import JsonResponse,HttpResponse
-from ..models import Store,User
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from ..models import Store, User
+
+@csrf_exempt
+def create_store(request, user_id):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST required"}, status=405)
+
+    user = get_object_or_404(User, pk=user_id)
+
+    store_name = request.POST.get("store_name")
+    contact_number = request.POST.get("contact_number")
+    store_address = request.POST.get("store_address")
+    store_description = request.POST.get("store_description")
+    store_profile = request.FILES.get("store_profile")
+
+    if not store_name or not store_address:
+        return JsonResponse({"error": "Missing required fields"}, status=400)
+
+    store = Store.objects.create(
+        store_owner=user,
+        store_name=store_name,
+        contact_number=contact_number,
+        store_address=store_address,
+        store_description=store_description
+    )
+
+    if store_profile:
+        store.store_profile = store_profile
+        store.save()
+
+    return JsonResponse({"message": "Store created", "id": store.id}, status=201)
 
 
-class StoreController:
+def list_stores(request):
+    if request.method != "GET":
+        return JsonResponse({"error": "GET required"}, status=405)
 
-    def create_store(request,id):
+    stores = Store.objects.select_related("store_owner")
+    data = [
+        {
+            "id": s.id,
+            "store_name": s.store_name,
+            "owner": f"{s.store_owner.first_name} {s.store_owner.last_name}",
+            "address": s.store_address
+        }
+        for s in stores
+    ]
+    return JsonResponse(data, safe=False)
 
-        user = get_object_or_404(User,pk=id)
 
-        if request.method == 'POST':
-            
-            store_name = request.POST.get('store_name')
-            store_profile = request.FILES.get('store_profile')
-            contact_number = request.POST.get('contact_number')
-            store_address = request.POST.get('store_address')
-            store_desciption = request.POST.get('store_description')
+@csrf_exempt
+def update_store(request, store_id):
+    if request.method not in ["PUT", "PATCH"]:
+        return JsonResponse({"error": "PUT or PATCH required"}, status=405)
+
+    store = get_object_or_404(Store, pk=store_id)
+
+    store.store_name = request.POST.get("store_name", store.store_name)
+    store.contact_number = request.POST.get("contact_number", store.contact_number)
+    store.store_address = request.POST.get("store_address", store.store_address)
+    store.store_description = request.POST.get("store_description", store.store_description)
+
+    if "store_profile" in request.FILES:
+        store.store_profile = request.FILES["store_profile"]
+
+    store.save()
+    return JsonResponse({"message": "Store updated"})
 
 
-            user.is_seller = True
-            user.save()
+@csrf_exempt
+def delete_store(request, store_id):
+    if request.method != "DELETE":
+        return JsonResponse({"error": "DELETE required"}, status=405)
 
-            #checks if the users has a store already
-            if hasattr(user,'store'):
-                return JsonResponse({'error':'User has a store already'},status = 400)
-            
-            if contact_number == None:
-                return JsonResponse({'error':'Contact Number is Required'})
-            
-            contact_number = int(contact_number)
-            
-            store = Store.objects.create(
-                user = user,
-                store_name = store_name,
-                contact_number = contact_number,
-                store_address = store_address,
-                store_description = store_desciption,
-            )
-
-            if store_profile:
-                store.store_profile = store_profile
-                store.save()
-
-            return JsonResponse({'message':'data has been successfully added'})
-        
-    def edit_store_information(request,id):
-
-        store = get_object_or_404(Store,pk = id)
-        
-        if request.method == 'POST':
-            
-            #to safely update the values in the database
-            store.store_name = request.POST.get('store_name',store.store_name)
-            store_profile = request.FILES.get('store_profile',store.store_profile)
-            store.contact_number = request.POST.get('contact_number',store.contact_number)
-            store.store_address = request.POST.get('store_address',store.store_address)
-            store.store_description = request.POST.get('store_description',store.store_description)
-
-            if store_profile:
-                store.user = store_profile
-
-            if store.contact_number == None:
-                return JsonResponse({'error':'a number must be applied'},status = 400)
-            
-            try:
-                store.contact_number = int(store.contact_number)
-
-            except ValueError:
-                return JsonResponse({'error':'value must be a integer'},status = 400)
-            
-            store.save()
-
-            return JsonResponse({'message':'store information successfully updated'},status = 201)
-        
-    def remove_store(request,id):
-        user = get_object_or_404(User,pk = id)
-        if request.method == 'POST':
-            store = get_object_or_404(Store,id = id)
-            store.delete()
-            user.is_seller = False
-            return JsonResponse({'message':'store succesfully deleted'},status = 201)
-        
-        return JsonResponse({'error':'failed to delete store'},status = 400)
+    store = get_object_or_404(Store, pk=store_id)
+    store.delete()
+    return JsonResponse({"message": "Store deleted"})

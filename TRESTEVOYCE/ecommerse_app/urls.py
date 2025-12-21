@@ -3,7 +3,12 @@ from .views_controllers import product_controller,  cart_controller, checkout_vi
 
 urlpatterns = [
     # Products
+    path('home/', login_logout_auth.home, name='home'),
+    path('login/', login_logout_auth.user_login, name='login'),
+    path('logout/', login_logout_auth.user_logout, name='logout'),
+    path('register/', login_logout_auth.register, name='register'),
     path("products/", product_controller.show_products),
+
     path("products/create/<int:store_id>/", product_controller.create_product),
     path("products/update/<int:product_id>/", product_controller.update_product),
     path("products/delete/<int:product_id>/", product_controller.delete_product),
@@ -30,9 +35,4 @@ urlpatterns = [
     path("orders/", orders_views.list_orders),
     path("orders/update/<int:order_id>/", orders_views.update_order_status),
     path("orders/delete/<int:order_id>/", orders_views.delete_order),
-
-    path('home/', login_logout_auth.home, name='home'),
-    path('login/', login_logout_auth.user_login, name='login'),
-    path('logout/', login_logout_auth.user_logout, name='logout'),
-    path('register/', login_logout_auth.register, name='register'),
 ]

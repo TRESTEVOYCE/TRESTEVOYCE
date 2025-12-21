@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from ..models import Cart, Product
+from ..models import Cart, Product, User
 
 @csrf_exempt
 def add_to_cart(request):
@@ -11,10 +11,16 @@ def add_to_cart(request):
 
     product_id = request.POST.get("product_id")
     quantity = int(request.POST.get("quantity", 1))
+    user_id = request.POST.get("user_id")  # NEW: pass user_id
 
+    if not user_id:
+        return JsonResponse({"error": "user_id is required"}, status=400)
+
+    user = get_object_or_404(User, pk=user_id)
     product = get_object_or_404(Product, pk=product_id)
+
     cart, created = Cart.objects.update_or_create(
-        customer=request.user,
+        customer=user,
         defaults={"product": product, "quantity": quantity}
     )
 

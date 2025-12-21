@@ -77,8 +77,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommersedb',
-        'USER':'root',
-        'PASSWORD':'Kazutokirigaya123!!!',
+        'USER':'django_user',
+        'PASSWORD':'kazutokirigaya123!!!',
         'HOST':'localhost',
         'PORT':'3306',
     }
@@ -120,6 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "ecommerse_app" / "static",
+]
 
 #this is where you store the images uploaded to database
 MEDIA_URL = '/media/'

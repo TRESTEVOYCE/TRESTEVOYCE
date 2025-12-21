@@ -1,0 +1,70 @@
+{% extends "vendor/base.html" %}
+{% load static %}
+
+{% block title %}Orders{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/css/order.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="orders-container">
+
+    <div class="orders-header">
+        <h2>All Orders</h2>
+
+        <div class="order-filters">
+            <button class="filter-btn active" data-status="all">All</button>
+            <button class="filter-btn" data-status="processing">Processing</button>
+            <button class="filter-btn" data-status="shipped">Shipped</button>
+            <button class="filter-btn" data-status="completed">Completed</button>
+        </div>
+    </div>
+
+    <div class="orders-search">
+        <input type="text" id="order-search" placeholder="Search orders...">
+    </div>
+
+    <div class="orders-table-wrapper">
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr data-status="{{ order.status|lower }}">
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>{{ order.product_name }}</td>
+                    <td>${{ order.total_amount }}</td>
+                    <td>
+                        <span class="status {{ order.status|lower }}">
+                            {{ order.status }}
+                        </span>
+                    </td>
+                    <td>{{ order.created_at|date:"Y-m-d" }}</td>
+                    <td class="actions">⋮</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="no-data">No orders found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'vendor/js/order.js' %}"></script>
+{% endblock %}

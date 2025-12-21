@@ -1,0 +1,46 @@
+.option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+      width: 100%;
+      color: #374151;
+    }
+
+    /* Fixed Active State: Blue background with white text */
+.option-btn.active {
+      background-color: #3b82f6 !important;
+      border-color: #3b82f6 !important;
+      color: white !important;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+.option-btn.active span {
+      color: #dbeafe !important; /* Lighter blue for the description */
+    }
+
+    /* Makes icons/SVGs white when the button is blue */
+.option-btn.active img, 
+.option-btn.active svg {
+      filter: brightness(0) invert(1);
+    }
+
+.option-btn div {
+      display: flex;
+      flex-direction: column;
+    }
+
+.option-btn strong {
+      font-size: 16px;
+    }
+
+.option-btn span {
+      font-size: 12px;
+      color: #6b7280;
+    }

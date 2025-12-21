@@ -1,0 +1,150 @@
+ body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #ffffff 0%, #3b82f6 100%);
+    }
+
+    .card {
+      background: white;
+      width: 100%;
+      max-width: 650px;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .header p {
+      margin: 0;
+      color: #4b5563;
+      font-size: 16px;
+    }
+
+    /* Selection Section */
+    .selection-label {
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+      font-size: 18px;
+    }
+
+    .toggle-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .toggle-box {
+      border: 1px solid #d1d5db;
+      border-radius: 15px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    /* Active State: Gray (as seen in Buyer screenshot) */
+    .toggle-box.active {
+      background-color: #9ca3af; 
+      border: none;
+      color: white;
+    }
+    
+    .toggle-box.active svg {
+      fill: white;
+    }
+
+    /* Inactive State: White with Black Border (as seen in Seller screenshot) */
+    .toggle-box.inactive {
+      background-color: #ffffff;
+      border: 1px solid #000;
+      color: #000;
+    }
+
+    .toggle-box strong {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    /* Form Layout */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 25px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 800;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      background-color: #f1f1f1;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    /* Utility */
+    .hidden {
+      display: none;
+    }
+
+    .signup-btn {
+      background-color: #eab308;
+      border: none;
+      width: 100%;
+      max-width: 320px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-link {
+  color: inherit; /* Keeps the text black */
+  text-decoration: none; /* Removes underline */
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+  color: #3b82f6; /* Optional: turns blue when hovering */
+}
+
+.footer {
+      text-align: center;
+      margin-top: 30px;
+   
+}

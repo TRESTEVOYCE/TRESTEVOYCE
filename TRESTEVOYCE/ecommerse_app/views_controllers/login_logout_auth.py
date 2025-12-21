@@ -10,8 +10,6 @@ from ..models import Product
 # --------------------------
 
 def user_login(request):
-    if request.user.is_authenticated:
-        return redirect("home")
 
     if request.method == "POST":
         username = request.POST.get("username")
@@ -23,6 +21,9 @@ def user_login(request):
             return redirect("home")
         else:
             messages.error(request, "Invalid username or password")
+
+    #if request.user.is_authenticated:
+        #return redirect("home")
 
     return render(request, "customer/login.html")
 
@@ -39,8 +40,8 @@ def user_logout(request):
 # Register view
 # --------------------------
 def register(request):
-    if request.user.is_authenticated:
-        return redirect("home")
+    #if request.user.is_authenticated:
+        #return redirect("home")
 
     if request.method == "POST":
         username = request.POST.get("username")

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'vendor/notifications.css' %}">
+
+<div class="notifications-page">
+
+    <!-- Notification Summary -->
+    <div class="notification-summary">
+        <div class="summary-item">
+            <div class="summary-count" id="total-count">{{ notifications|length }}</div>
+            <div class="summary-label">Total</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-count" id="unread-count">{{ notifications|filter:"is_read=False"|length }}</div>
+            <div class="summary-label">Unread</div>
+        </div>
+        <div class="summary-item">
+            <div class="summary-count" id="high-priority-count">{{ notifications|filter:"is_urgent=True"|length }}</div>
+            <div class="summary-label">High Priority</div>
+        </div>
+    </div>
+
+    <!-- Notification Controls -->
+    <div class="notification-controls">
+        <h3>All Notifications</h3>
+        <div class="control-buttons">
+            <button id="mark-all-read" class="btn-primary">Mark All Read</button>
+            <button id="clear-all" class="btn-danger">Clear All</button>
+        </div>
+    </div>
+
+    <!-- Notification List -->
+    <div class="notification-list" id="notification-list">
+        {% for notification in notifications %}
+        <div class="notification-item" data-id="{{ notification.id }}">
+            <div class="notification-left">
+                <strong class="notification-title">{{ notification.title }}</strong>
+                <div class="notification-desc">{{ notification.description }}</div>
+                <div class="notification-time">{{ notification.time_since }}</div>
+            </div>
+            <div class="notification-right">
+                <div class="notification-flags">
+                    {% if notification.is_urgent %}
+                    <span class="urgent">Urgent</span>
+                    {% endif %}
+                    {% if not notification.is_read %}
+                    <span class="new">New</span>
+                    {% endif %}
+                </div>
+                <div class="notification-actions">
+                    <button class="mark-read btn-outline">Mark Read</button>
+                    <button class="delete btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="{% static 'vendor/notifications.js' %}"></script>
+{% endblock %}

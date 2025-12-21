@@ -122,7 +122,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "ecommerse_app" / "static",
+    BASE_DIR / "static",
 ]
 
 #this is where you store the images uploaded to database

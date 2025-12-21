@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 
-from ..models import Cart, Product, User
+from ..models import Cart, Product, Profile as User
 
 @csrf_exempt
 def add_to_cart(request):

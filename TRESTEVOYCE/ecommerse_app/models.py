@@ -73,7 +73,7 @@ class Orders(models.Model):
 
     customer = models.OneToOneField(User,on_delete=models.CASCADE,related_name='orders')
     total_amount = models.PositiveIntegerField()
-    order_status = models.CharField(choices=STATUS,default="PENDING")
+    order_status = models.CharField(max_length=50,choices=STATUS,default="PENDING")
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now_add=True,null=True)
 

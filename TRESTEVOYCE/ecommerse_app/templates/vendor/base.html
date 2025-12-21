@@ -14,13 +14,13 @@
         <aside class="sidebar">
             <div class="logo">Vendor Portal</div>
             <ul class="menu">
-                <li class="active">Overview</li>
-                <li>Products</li>
-                <li>Orders <span class="badge">3</span></li>
-                <li>Analytics</li>
-                <li>Settings</li>
-                <li>Notifications</li>
-                <li class="add-product">Add Product</li>
+                <li><a href="{% url 'dashboard' %}">Overview</a></li>
+                <li><a href="{% url 'products' %}">Products</a></li>
+                <li><a href="{% url 'orders' %}">Orders <span class="badge">3</span></a></li>
+                <li><a href="{% url 'analytics' %}">Analytics</a></li>
+                <li><a href="{% url 'settings' %}">Settings</a></li>
+                <li><a href="{% url 'notifications' %}">Notifications</a></li>
+                <li class="add-product"><a href="{% url 'products' %}">Add Product</a></li>
             </ul>
             <button class="logout-btn">Logout</button>
         </aside>

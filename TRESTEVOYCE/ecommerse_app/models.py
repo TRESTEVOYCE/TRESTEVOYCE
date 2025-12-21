@@ -1,6 +1,6 @@
 from django.db import models
 
-class User(models.Model):
+class Profile(models.Model):
     first_name = models.CharField(max_length=55)
     last_name = models.CharField(max_length=55)
     email_address = models.EmailField(max_length=100)
@@ -19,7 +19,7 @@ class User(models.Model):
 
 class Store(models.Model):
     store_name = models.CharField(max_length=255)
-    store_owner = models.OneToOneField(User,on_delete=models.CASCADE,related_name='store')
+    store_owner = models.OneToOneField(Profile,on_delete=models.CASCADE,related_name='store')
     store_profile = models.ImageField(upload_to='store_profiles/', null=True, blank=True)
     contact_number = models.IntegerField(null=True)
     store_address = models.CharField(max_length=255)
@@ -51,7 +51,7 @@ class Inventory(models.Model):
 
 
 class Cart(models.Model):
-    customer = models.OneToOneField(User,on_delete=models.CASCADE,related_name='cart')
+    customer = models.OneToOneField(Profile,on_delete=models.CASCADE,related_name='cart')
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     quantity = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -69,7 +69,7 @@ class Orders(models.Model):
         ('RETURNED','Returned'),
     ]
 
-    customer = models.OneToOneField(User,on_delete=models.CASCADE,related_name='orders')
+    customer = models.OneToOneField(Profile,on_delete=models.CASCADE,related_name='orders')
     total_amount = models.PositiveIntegerField()
     order_status = models.CharField(choices=STATUS,default="PENDING", max_length=255)
     created_date = models.DateTimeField(auto_now_add=True)

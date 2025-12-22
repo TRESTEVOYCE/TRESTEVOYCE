@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Product, Customer, Order
+from django.db.models import Sum
 # ------------------------
 # AUTHENTICATION VIEWS
 # ------------------------
@@ -19,7 +21,7 @@ def login_view(request):
             user = authenticate(request, username=user_obj.username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('base')  # Redirect to base.html with dashboard
+                return redirect('dashboard')  # Redirect to base.html with dashboard
             else:
                 messages.error(request, "Invalid email or password")
         else:
@@ -47,7 +49,7 @@ def signup_view(request):
         # Create new user
         user = User.objects.create_user(username=username, email=email, password=password)
         login(request, user)
-        return redirect('base')  # Redirect to base.html with dashboard
+        return redirect('dashboard')  # Redirect to base.html with dashboard
 
     return render(request, 'vendor/signup.html')
 
@@ -61,53 +63,48 @@ def logout_view(request):
 # MAIN VIEWS
 # ------------------------
 
-def base_view(request):
-    """
-    Base layout page. Dashboard.html is shown by default.
-    Other pages will extend this layout by overriding the content block.
-    """
-    return render(request, 'vendor/base.html')
 
 
+
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import Product, Customer, Order
+from django.db.models import Sum
 
 @login_required
 def dashboard(request):
-    # Replace these with real data from your models
+    total_revenue = Order.objects.aggregate(total=Sum('amount'))['total'] or 0
+    total_orders = Order.objects.count()
+    total_products = Product.objects.count()
+    total_customers = Customer.objects.count()
+    orders = Order.objects.order_by('-date')[:10]  # last 10 orders
+
     context = {
-        "total_revenue": 5000,
-        "total_orders": 25,
-        "total_products": 50,
-        "total_customers": 100,
-        "orders": [
-            {
-                "id": 1,
-                "customer": {"name": "John Doe"},
-                "product": {"name": "Product A"},
-                "amount": 100,
-                "status": "Completed",
-                "date": "2025-12-22",
-            },
-            # Add more dummy orders or fetch from database
-        ]
+        "total_revenue": total_revenue,
+        "total_orders": total_orders,
+        "total_products": total_products,
+        "total_customers": total_customers,
+        "orders": orders
     }
     return render(request, 'vendor/dashboard.html', context)
 
 
-def products_view(request):
+
+def products(request):
     return render(request, 'vendor/products.html')
 
 
-def orders_view(request):
+def orders(request):
     return render(request, 'vendor/orders.html')
 
 
-def analytics_view(request):
+def analytics(request):
     return render(request, 'vendor/analytics.html')
 
 
-def settings_view(request):
+def setting(request):
     return render(request, 'vendor/settings.html')
 
 
-def notifications_view(request):
+def notifications(request):
     return render(request, 'vendor/notifications.html')

@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Vendor Portal{% endblock %}</title>
+
+    <!-- Base CSS -->
     <link rel="stylesheet" href="{% static 'vendor/css/base.css' %}">
+    
+    <!-- Extra CSS for specific pages -->
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -22,7 +26,10 @@
                 <li><a href="{% url 'notifications' %}">Notifications</a></li>
                 <li class="add-product"><a href="{% url 'products' %}">Add Product</a></li>
             </ul>
-            <button class="logout-btn">Logout</button>
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
         </aside>
 
         <!-- Main Content -->
@@ -42,13 +49,18 @@
                 </div>
             </header>
 
-
             <!-- Page-specific content -->
-            {% block content %}{% endblock %}
+            {% block content %}
+                <!-- Default content: dashboard -->
+                
+            {% endblock %}
         </main>
     </div>
 
+    <!-- Base JS -->
     <script src="{% static 'vendor/js/base.js' %}"></script>
+    
+    <!-- Extra JS for specific pages -->
     {% block extra_js %}{% endblock %}
 </body>
 </html>

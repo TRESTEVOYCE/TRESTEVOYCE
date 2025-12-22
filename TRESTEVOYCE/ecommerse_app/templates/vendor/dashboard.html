@@ -1,4 +1,5 @@
-{% extends 'vendor/base_vendor.html' %}
+{% extends 'vendor/base.html' %}
+{% load static %}
 
 {% block title %}Vendor Dashboard{% endblock %}
 
@@ -6,7 +7,12 @@
 <link rel="stylesheet" href="{% static 'vendor/css/dashboard.css' %}">
 {% endblock %}
 
+{% block page_title %}
+Dashboard Overview
+{% endblock %}
+
 {% block content %}
+
 <!-- Metrics Summary Cards -->
 <section class="metrics">
     <div class="card">
@@ -50,7 +56,13 @@
                 <td>${{ order.amount }}</td>
                 <td>
                     <span class="status 
-                        {% if order.status == 'Completed' %}completed{% elif order.status == 'Processing' %}processing{% else %}shipped{% endif %}">
+                        {% if order.status == 'Completed' %}
+                            completed
+                        {% elif order.status == 'Processing' %}
+                            processing
+                        {% else %}
+                            shipped
+                        {% endif %}">
                         {{ order.status }}
                     </span>
                 </td>
@@ -64,6 +76,7 @@
         </tbody>
     </table>
 </section>
+
 {% endblock %}
 
 {% block extra_js %}

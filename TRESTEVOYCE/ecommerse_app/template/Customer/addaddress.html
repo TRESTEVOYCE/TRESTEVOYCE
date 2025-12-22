@@ -1,0 +1,52 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="addaddressscript.js"></script>
+
+ 
+
+ <div class="modal-overlay" id="address-modal-ui">
+    <div class="address-modal">
+        <i class="fa fa-xmark" style="position:absolute; top:20px; right:20px; font-size:24px; cursor:pointer;" onclick="toggleAddressModal(false)"></i>
+        <h2 style="text-align:center; font-weight:900; margin-top:0;">Add new Addresses</h2>
+        <p style="text-align:center; color:#666; font-size:13px; margin-bottom:25px;">Fill in the details for your new address</p>
+        
+
+
+        <form id="address-form-element" onsubmit="saveNewAddress(event)">
+            <div class="modal-grid">
+                <div class="form-group"><label>Address Type</label><input type="text" id="in-type" placeholder="Home / Work" required></div>
+                <div class="form-group"><label>Label</label><input type="text" id="in-label" placeholder="e.g. My Apartment"></div>
+                <div class="form-group"><label>First Name *</label><input type="text" id="in-fname" required></div>
+                <div class="form-group"><label>Last Name *</label><input type="text" id="in-lname" required></div>
+                <div class="form-group"><label>Region *</label><input type="text" id="in-region" required></div>
+                <div class="form-group"><label>Province *</label><input type="text" id="in-prov" required></div>
+                <div class="form-group"><label>Municipality *</label><input type="text" id="in-muni" required></div>
+                <div class="form-group"><label>Barangay *</label><input type="text" id="in-brgy" required></div>
+                <div class="form-group"><label>Street/ Purok *</label><input type="text" id="in-street" required></div>
+                <div class="form-group"><label>Contact Number *</label><input type="text" id="in-phone" placeholder="0963 xxx xxxx" required></div>
+            </div>
+            <div style="text-align:center; margin-top:30px;">
+                <button type="submit" class="btn-action btn-buy-style" style="width:100%; max-width:250px;">Add Address</button>
+            </div>
+        </form>
+
+        <i class="fa fa-xmark" 
+        style="position:absolute; top:20px; right:20px; font-size:24px; cursor:pointer;" 
+        onclick="location.href='address.html'">
+        </i>
+
+
+    </div>
+  </div>
+
+</head>
+
+
+  

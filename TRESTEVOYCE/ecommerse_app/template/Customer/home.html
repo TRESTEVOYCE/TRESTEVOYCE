@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="backupjs.js"></script>
+
+
+
+
+</head>
+<body id="home-top">
+
+<nav class="navbar">
+  <div class="logo" onclick="closeDisplay()" style="cursor: pointer;">
+    <span style="font-family: 'Poppins', cursive; font-size: 28px; color: #000; font-weight: 900;">Trestevoyce</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#home-top">Home</a></li>
+    <li><a href="#shop-all" >Shop</a></li>
+    <li><a href="#new-arrivals">New Arrivals</a></li>
+    <li><a href="#flash-deals">Sale</a></li>
+  </ul>
+
+<div class="search-box">
+  <input type="text" id="search-input" placeholder="Search brands, products...">
+  <i class="fa fa-search" style="cursor: pointer;" onclick="triggerSearch()"></i>
+</div>
+    <div class="nav-icons">
+      <div class="icon-wrapper" onclick="toggleSidebar('wishlist-sidebar')">
+        <i class="fa-regular fa-heart"></i>
+        <span class="badge" id="wish-badge">0</span>
+      </div>
+      <div class="icon-wrapper" onclick="toggleSidebar('cart-sidebar')">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="badge" id="cart-badge">0</span>
+      </div>
+      <div class="icon-wrapper" onclick="toggleSidebar('profile-sidebar')">
+        <i class="fa-regular fa-circle-user"></i>
+      </div>
+    </div>
+  </nav>
+
+  <div class="sidebar-overlay" id="overlay" onclick="closeAllSidebars()"></div>
+
+  <div class="sidebar" id="profile-sidebar">
+    <div class="sidebar-header">
+      <div class="user-info">
+        <i class="fa-solid fa-circle-user"></i>
+        <div class="user-details">
+          <h3>Customer's Profile</h3>
+          <p>sample@gmail.com</p>
+        </div>
+      </div>
+      <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:24px;" onclick="closeAllSidebars()"></i>
+    </div>
+    <div class="menu-group">
+      <h4>Accounts</h4>
+      <div class="menu-item" onclick="openOrdersPage()"><div><i class="fa-solid fa-box-open"></i> My Orders</div> <i class="fa-solid fa-chevron-right"></i></div>
+      <div class="menu-item" onclick="openAddressPage()"><div><i class="fa-solid fa-location-dot"></i> Address</div> <i class="fa-solid fa-chevron-right"></i></div>
+      <div class="menu-item"><div><i class="fa-solid fa-wallet"></i> Payment methods</div> <i class="fa-solid fa-chevron-right"></i></div>
+    </div>
+    <div class="menu-group">
+      <h4>Preferences</h4>
+      <div class="menu-item" onclick="openSettingsPage()"><div><i class="fa-solid fa-gear"></i> Settings</div> <i class="fa-solid fa-chevron-right"></i></div>
+      <div class="menu-item" onclick="openHelpCenterPage()"><div><i class="fa-solid fa-headset"></i> Help Center</div> <i class="fa-solid fa-chevron-right"></i></div>
+    </div>
+    <button class="btn-logout" onclick="handleLogout()">Log out</button>
+  </div>
+
+  <div class="sidebar" id="wishlist-sidebar">
+    <div class="sidebar-header">
+      <h2><i class="fa-regular fa-heart"></i> Wishlist (<span id="wish-count-header">0</span>)</h2>
+      <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:24px;" onclick="closeAllSidebars()"></i>
+    </div>
+    <div id="wishlist-list" style="overflow-y:auto; flex:1;"></div>
+  </div>
+
+  <div class="sidebar" id="cart-sidebar">
+    <div class="sidebar-header">
+      <h2><i class="fa-solid fa-cart-shopping"></i> Shopping Cart</h2>
+      <i class="fa-solid fa-xmark" style="cursor:pointer; font-size:24px;" onclick="closeAllSidebars()"></i>
+    </div>
+    <div id="cart-list" style="overflow-y:auto; flex:1;"></div>
+    <div style="border-top:2px solid #eee; padding-top:15px; margin-top:10px;">
+        <h3 style="display:flex; justify-content:space-between;">Total: <span id="cart-total">₱0.00</span></h3>
+        <button class="btn-action btn-buy-style" style="width:100%" onclick="checkoutCart()">Checkout</button>
+    </div>
+  </div>
+
+  <div id="home-wrapper">
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Find it, Love it, <br> Buy it</h1>
+        <button class="btn-shop-now" onclick="location.href='#shop-all'">Shop Now</button>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <div class="page-title" id="shop-all"> <h2>Shop All Products</h2>
+        <p>Discover our curated collection of premium products</p>
+      </div>
+
+      <div class="category-filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="clothing"><i class="fa-solid fa-shirt"></i> Clothing <small>2</small></button>
+        <button class="filter-btn" data-category="shoes"><i class="fa-solid fa-shoe-prints"></i> Shoes <small>1</small></button>
+        <button class="filter-btn" data-category="bags"><i class="fa-solid fa-bag-shopping"></i> Bags <small>1</small></button>
+        <button class="filter-btn" data-category="watches"><i class="fa-solid fa-clock"></i> Watches <small>1</small></button>
+      </div>
+
+      <div class="section-box" id="new-arrivals"> <div class="section-title-row">
+          <h3>New Arrivals</h3>
+           <a href="#" class="see-all">See all <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+        <div id="new-arrivals-grid" class="product-grid"></div>
+      </div>
+
+      <div class="section-box" id="flash-deals"> <div class="section-title-row">
+          <h3>Flash Deals</h3>
+
+        </div>
+        <div id="flash-deals-grid" class="product-grid"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <h2 style="font-family: 'Cedarville Cursive', cursive; color: var(--gold); font-size: 32px; margin: 0 0 15px;">Trestevoyce</h2>
+          <p style="font-size: 14px; color: #ccc;">Curated premium fashion and lifestyle essentials. Quality meets style.</p>
+          <div style="display: flex; gap: 15px; margin-top: 20px;">
+            <a href="#" style="color: #fff; font-size: 20px;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" style="color: #fff; font-size: 20px;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" style="color: #fff; font-size: 20px;"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-weight: 900; margin-bottom: 20px; text-transform: uppercase;">Shop</h4>
+          <ul class="footer-links">
+            <li><a href="#new-arrivals">New Arrivals</a></li>
+            <li><a href="#"  onclick="openHelpCenterPage()">Contact us</a></li>
+            <li><a href="#flash-deals">Flash Sale</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-weight: 900; margin-bottom: 20px; text-transform: uppercase;">Support</h4>
+          <ul class="footer-links">
+            <li><a href="#" onclick="openHelpCenterPage()">Help Center</a></li>
+            <li><a href="#">Shipping & Returns</a></li>
+            <li><a href="#"onclick="openOrdersPage()">Track Order</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-weight: 900; margin-bottom: 20px; text-transform: uppercase;">Stay Updated</h4>
+          <div class="newsletter-box">
+            <input type="email" placeholder="Email address">
+            <button>JOIN</button>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <p style="font-size: 12px; color: #666;">&copy; 2025 Trestevoyce. All rights reserved.</p>
+        <div style="display: flex; gap: 15px; font-size: 24px; color: #444;">
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-brands fa-cc-paypal"></i>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+
+  <div id="message-toast" class="toast-notification">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Action successful!</span>
+  </div>
+
+  
+</body>
+
+</html>

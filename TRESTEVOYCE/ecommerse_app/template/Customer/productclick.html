@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - View Product</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="productscript.js"></script>
+</head>
+<body>
+
+<body id="home-top">
+
+<nav class="navbar">
+  <div class="logo" onclick="closeDisplay()" style="cursor: pointer;">
+    <span style="font-family: 'Poppins', cursive; font-size: 28px; color: #000; font-weight: 900;">Trestevoyce</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#home-top" onclick="closeDisplay()">Home</a></li>
+    <li><a href="#shop-all" onclick="closeDisplay()">Shop</a></li>
+    <li><a href="#new-arrivals" onclick="closeDisplay()">New Arrivals</a></li>
+    <li><a href="#flash-deals" onclick="closeDisplay()">Sale</a></li>
+  </ul>
+
+<div class="search-box">
+  <input type="text" id="search-input" placeholder="Search brands, products...">
+  <i class="fa fa-search" style="cursor: pointer;" onclick="triggerSearch()"></i>
+</div>
+</nav>
+
+
+<main style="padding-top: 100px;">
+  <section id="product-display-section" style="display: block;">
+    <div class="back-nav" onclick="location.href='home.html'">
+        <i class="fa fa-chevron-left"></i> Back to Shop
+    </div>
+
+    <div class="display-container">
+      <div class="display-gallery">
+        <div class="display-main-img">
+          <img id="view-img" src="" alt="View Product">
+        </div>
+      </div>
+      <div class="display-details">
+        <h1 id="view-title" style="margin:0; font-weight:900;">Product Title</h1>
+        <div class="display-price"><span>₱</span> <span id="view-price">0.00</span></div>
+        <div class="display-desc">
+          <span class="label-bold">Description</span>
+          <p id="view-desc">Premium quality product designed for comfort and style.</p>
+        </div>
+
+        <div class="interactive-row">
+          <span class="label-bold" style="margin:0">Quantity:</span>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="setQty(-1)">-</button>
+            <div class="qty-val" id="view-qty">1</div>
+            <button class="qty-btn" onclick="setQty(1)">+</button>
+          </div>
+        </div>
+
+        <div class="display-actions">
+          <button class="btn-action btn-cart-style" onclick="addToCartFromDetail()">Add to Cart</button>
+          <button class="btn-action btn-buy-style" onclick="checkoutSingle()">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<div id="message-toast" class="toast-notification">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Added to Cart!</span>
+</div>
+
+</body>
+</html>

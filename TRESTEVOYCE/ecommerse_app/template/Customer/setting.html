@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="setting.css">
+  <script src="settingscript.js"></script>
+
+</head>
+<body id="home-top">
+
+<nav class="navbar">
+  <div class="logo" onclick="closeDisplay()" style="cursor: pointer;">
+    <span style="font-family: 'Poppins', cursive; font-size: 28px; color: #000; font-weight: 900;">Trestevoyce</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#home-top" onclick="closeDisplay()">Home</a></li>
+    <li><a href="#shop-all" onclick="closeDisplay()">Shop</a></li>
+    <li><a href="#new-arrivals" onclick="closeDisplay()">New Arrivals</a></li>
+    <li><a href="#flash-deals" onclick="closeDisplay()">Sale</a></li>
+  </ul>
+
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Search brands, products...">
+    <i class="fa fa-search" style="cursor: pointer;" onclick="triggerSearch()"></i>
+  </div>
+</nav>
+
+<section id="settings-page">
+    <div class="back-nav" onclick="closeDisplay()" style="cursor: pointer; margin-bottom: 20px; font-weight: 700;">
+        <i class="fa-solid fa-chevron-left"></i> Back to Shop
+    </div>
+    
+    <h2 style="font-weight:900; margin-top:0; font-size: 32px; margin-bottom: 30px;">Settings</h2>
+    
+    <div class="settings-grid">
+        <div class="settings-card">
+            <div class="settings-header">
+                <i class="fa-solid fa-circle-user" style="font-size: 24px; color: #94a3b8;"></i>
+                <h3 style="margin: 0; font-weight: 700;">Profile Information</h3>
+            </div>
+            <div class="settings-body">
+                <div class="settings-field">
+                    <label>Name</label>
+                    <input type="text" value="Steven Chismoso">
+                </div>
+                <div class="settings-field">
+                    <label>Email Address</label>
+                    <input type="email" value="sample@gmail.com">
+                </div>
+                <div class="settings-field">
+                    <label>Phone Number</label>
+                    <input type="text" value="0963 xxx xxxx">
+                </div>
+                <button class="btn-save-settings">Save Changes</button>
+            </div>
+        </div>
+
+        <div class="settings-card">
+            <div class="settings-header">
+                <i class="fa-solid fa-shield-halved" style="font-size: 20px; color: #94a3b8;"></i>
+                <h3 style="margin: 0; font-weight: 700;">Security</h3>
+            </div>
+            <div class="settings-body">
+                <div class="settings-field">
+                    <label>Current Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                <div class="settings-field">
+                    <label>New Password</label>
+                    <input type="password">
+                </div>
+                <div class="settings-field">
+                    <label>Confirm Password</label>
+                    <input type="password">
+                </div>
+                <button class="btn-save-settings">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</section>

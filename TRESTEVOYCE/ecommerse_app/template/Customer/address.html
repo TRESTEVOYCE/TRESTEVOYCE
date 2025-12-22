@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="address.js"></script>
+
+
+</head>
+<body id="home-top">
+
+<nav class="navbar">
+  <div class="logo" onclick="closeDisplay()" style="cursor: pointer;">
+    <span style="font-family: 'Poppins', cursive; font-size: 28px; color: #000; font-weight: 900;">Trestevoyce</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#home-top" onclick="closeDisplay()">Home</a></li>
+    <li><a href="#shop-all" onclick="closeDisplay()">Shop</a></li>
+    <li><a href="#new-arrivals" onclick="closeDisplay()">New Arrivals</a></li>
+    <li><a href="#flash-deals" onclick="closeDisplay()">Sale</a></li>
+  </ul>
+
+<div class="search-box">
+  <input type="text" id="search-input" placeholder="Search address...">
+  <i class="fa fa-search" style="cursor: pointer;" onclick="triggerSearch()"></i>
+</div>
+
+</nav>
+
+<main style="padding-top: 120px; max-width: 1000px; margin: 0 auto; padding-inline: 20px;">
+  <div class="back-nav" onclick="location.href='home.html'" style="margin-bottom: 25px; cursor: pointer;">
+  <i class="fa fa-chevron-left"></i> Back to Shop </div>
+  
+  <section id="addresses-display-section">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+        <h2 style="font-weight: 900; margin: 0; font-size: 28px;">My Addresses</h2>
+          
+
+        <button id="add-address-btn" onclick="location.href='addaddress.html'" style="background: #000; color: #fff; border: none; padding: 12px 24px; border-radius: 12px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-plus"></i> ADD ADDRESS </button></div>
+
+    <div id="address-grid-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;"></div>
+  </section>
+
+
+</main>
+
+      
+
+</body>
+</html>

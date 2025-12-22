@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trestevoyce - Edit Address</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="home.css">
+  <script src="editscript.js"></script>
+  
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo" onclick="location.href='home.html'" style="cursor: pointer;">
+    <span style="font-family: 'Poppins', sans-serif; font-size: 28px; color: #000; font-weight: 900;">Trestevoyce</span>
+  </div>
+</nav>
+
+<main style="padding-top: 120px; max-width: 600px; margin: 0 auto; padding-inline: 20px;">
+  <div class="back-nav" onclick="location.href='address.html'" style="margin-bottom: 25px; cursor: pointer;">
+    <i class="fa fa-chevron-left"></i> Back to Addresses
+  </div>
+  
+  <section id="edit-address-container">
+    <h2 style="font-weight: 900; margin-bottom: 25px;">Edit Address</h2>
+    
+    <form id="edit-address-form" style="display: flex; flex-direction: column; gap: 15px;">
+      <div class="input-group">
+        <label style="font-weight: 700; display: block; margin-bottom: 5px;">Name</label>
+        <input type="text" id="edit-name" required style="width: 100%; padding: 12px; border: 1.5px solid #ccc; border-radius: 10px;">
+      </div>
+
+      <div class="input-group">
+        <label style="font-weight: 700; display: block; margin-bottom: 5px;">Phone Number</label>
+        <input type="text" id="edit-phone" required style="width: 100%; padding: 12px; border: 1.5px solid #ccc; border-radius: 10px;">
+      </div>
+
+  <div class="input-group">
+  <label style="font-weight: 700; display: block; margin-bottom: 5px;">Street/House No.</label>
+  <input type="text" id="edit-street" required style="width: 100%; padding: 12px; border: 1.5px solid #ccc; border-radius: 10px;">
+</div>
+
+<div class="input-group">
+  <label style="font-weight: 700; display: block; margin-bottom: 5px;">Barangay</label>
+  <input type="text" id="edit-brgy" required style="width: 100%; padding: 12px; border: 1.5px solid #ccc; border-radius: 10px;">
+</div>
+
+<div class="input-group">
+  <label style="font-weight: 700; display: block; margin-bottom: 5px;">Municipality/City</label>
+  <input type="text" id="edit-muni" required style="width: 100%; padding: 12px; border: 1.5px solid #ccc; border-radius: 10px;">
+</div>
+
+<div class="input-group">
+  <label style="font-weight: 700; display: block; margin-bottom: 5px;">Province</label>
+  <input type="text" id="edit-prov" required style="width: 100%; padding: 12px; border: 1.5px solid #ccc; border-radius: 10px;">
+</div>
+
+      <button type="submit" style="background: #000; color: #fff; border: none; padding: 15px; border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 10px;">
+        SAVE CHANGES
+      </button>
+    </form>
+  </section>
+</main>
+
+
+</body>
+</html>

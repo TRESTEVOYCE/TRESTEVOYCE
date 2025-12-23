@@ -73,6 +73,7 @@ from django.db.models import Sum
 
 @login_required
 def dashboard(request):
+    print( "Dashboard view accessed by user:", request.user )
     total_revenue = Order.objects.aggregate(total=Sum('amount'))['total'] or 0
     total_orders = Order.objects.count()
     total_products = Product.objects.count()

@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Product, Customer, Order
+from .models import Product, Customer, Order, Notification
 from django.db.models import Sum
+
 # ------------------------
 # AUTHENTICATION VIEWS
 # ------------------------
@@ -108,4 +109,16 @@ def setting(request):
 
 
 def notifications(request):
-    return render(request, 'vendor/notifications.html')
+    notifications = Notification.objects.all()
+    total_count = notifications.count()
+    unread_count = notifications.filter(is_read=False).count()
+    high_priority_count = notifications.filter(is_urgent=True).count()
+
+    context = {
+        'notifications': notifications,
+        'total_count': total_count,
+        'unread_count': unread_count,
+        'high_priority_count': high_priority_count,
+    }
+    return render(request, 'vendor/notifications.html', context)
+

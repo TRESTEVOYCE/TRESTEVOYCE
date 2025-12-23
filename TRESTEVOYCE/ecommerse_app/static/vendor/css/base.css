@@ -19,6 +19,7 @@ body, html {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    position: sticky;
 }
 
 .sidebar .logo {
@@ -97,17 +98,24 @@ body, html {
 
 /* ---------- Main Content ---------- */
 .main-content {
-    flex-grow: 1;
-    padding: 20px 30px;
+    width: calc(100% - 260px);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+
 }
 
 /* ---------- Top Header ---------- */
 .top-header {
     display: flex;
-    flex-direction: column;
     padding: 20px;
     border-bottom: 1px solid #e0e0e0;
     background: #f9f9f9;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    justify-content: space-between;
 }
 
 .page-title {
@@ -183,3 +191,10 @@ body, html {
 .status.completed { background: green; }
 .status.processing { background: orange; }
 .status.shipped { background: #1e90ff; }
+
+.page-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0px 30px;
+    background: #f4f6f8;
+}

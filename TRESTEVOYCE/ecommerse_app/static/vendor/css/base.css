@@ -34,20 +34,28 @@ body, html {
 }
 
 .sidebar ul.menu li {
-    padding: 12px 10px;
     margin-bottom: 10px;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.2s;
 }
 
-.sidebar ul.menu li:hover{
+.sidebar ul.menu li a {
+    display: flex;               /* Full-width clickable */
+    align-items: center;
+    justify-content: space-between; /* Badge on right */
+    padding: 12px 15px;
+    color: #fff !important;      /* force white text */
+    font-family: Arial, Helvetica, sans-serif !important;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.sidebar ul.menu li a:hover {
     background-color: #33334d;
 }
 
-.sidebar ul.menu li.active {
-    background-color: white;
-    color: #1f1f2e;
+.sidebar ul.menu li a.active {
+    background-color: #fff;
+    color: #1f1f2e !important;
 }
 
 .sidebar ul.menu li .badge {
@@ -55,22 +63,24 @@ body, html {
     padding: 2px 6px;
     border-radius: 12px;
     font-size: 0.75rem;
-    margin-left: 6px;
 }
 
+
+/* Logout Button */
 .logout-btn {
     margin-top: auto;
     padding: 10px 15px;
     border: none;
-    background: none;       
-    color: #fff;           
+    background-color: #e74c3c;
+    color: #fff;
     font-size: 1rem;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;               
-    transition: color 0.2s;
+    border-radius: 6px;
+    transition: background 0.2s;
+    display: block;
+    width: 100%;
 }
+
 
 .logout-btn:hover {
     border-radius: 6px;

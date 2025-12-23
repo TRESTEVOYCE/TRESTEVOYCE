@@ -2,6 +2,7 @@
     background: #fff;
     padding: 20px;
     border-radius: 10px;
+    margin-top: 20px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
@@ -41,15 +42,30 @@
 
 /* Search */
 .orders-search {
+    position: relative;
+    width: 95%; /* adjust width as needed */
     margin-bottom: 15px;
+    margin-left: 10px;
 }
 
 .orders-search input {
     width: 100%;
-    padding: 8px 12px;
+    padding: 8px 8px 8px 30px; /* leave space for the icon on the left */
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
+    font-size: 1rem;
 }
+
+.orders-search .search-icon {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: #737373; /* icon color */
+    pointer-events: none; /* allows clicking the input without interference */
+}
+
+
 
 /* Table */
 .orders-table {

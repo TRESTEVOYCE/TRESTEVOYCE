@@ -14,18 +14,23 @@
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
+<!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">Vendor Portal</div>
             <ul class="menu">
-                <li><a href="{% url 'dashboard' %}">Overview</a></li>
-                <li><a href="{% url 'products' %}">Products</a></li>
-                <li><a href="{% url 'orders' %}">Orders <span class="badge">3</span></a></li>
-                <li><a href="{% url 'analytics' %}">Analytics</a></li>
-                <li><a href="{% url 'settings' %}">Settings</a></li>
-                <li><a href="{% url 'notifications' %}">Notifications</a></li>
-                <li class="add-product"><a href="{% url 'products' %}">Add Product</a></li>
+                <li><a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard/' %}active{% endif %}">Overview</a></li>
+                <li><a href="{% url 'products' %}" class="{% if request.path == '/products/' %}active{% endif %}">Products</a></li>
+                <li>
+                    <a href="{% url 'orders' %}" class="{% if request.path == '/orders/' %}active{% endif %}">
+                        Orders <span class="badge">3</span>
+                    </a>
+                </li>
+                <li><a href="{% url 'analytics' %}" class="{% if request.path == '/analytics/' %}active{% endif %}">Analytics</a></li>
+                <li><a href="{% url 'settings' %}" class="{% if request.path == '/settings/' %}active{% endif %}">Settings</a></li>
+                <li><a href="{% url 'notifications' %}" class="{% if request.path == '/notifications/' %}active{% endif %}">Notifications</a></li>
+                <li><a href="{% url 'products' %}">Add Product</a></li>
             </ul>
+
             <form method="POST" action="{% url 'logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn">Logout</button>

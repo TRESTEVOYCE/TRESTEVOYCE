@@ -96,7 +96,7 @@ def products(request):
 
 
 def orders(request):
-    return render(request, 'vendor/orders.html')
+    return render(request, 'vendor/order.html')
 
 
 def analytics(request):

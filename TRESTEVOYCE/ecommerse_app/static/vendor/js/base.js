@@ -15,19 +15,23 @@ menuItems.forEach(item => {
 
 // ---------- Simple welcome toast notification ----------
 window.addEventListener('load', () => {
-    const toast = document.createElement('div');
-    toast.textContent = "Welcome back!";
-    toast.style.position = 'fixed';
-    toast.style.bottom = '20px';
-    toast.style.right = '20px';
-    toast.style.color = 'white';
-    toast.style.backgroundColor = 'rgba(0, 0, 16)';
-    toast.style.padding = '10px 20px';
-    toast.style.borderRadius = '6px';
-    toast.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
-    document.body.appendChild(toast);
+    // Only show on dashboard page
+    if (window.location.pathname === '/dashboard/') {
+        const toast = document.createElement('div');
+        toast.textContent = "Welcome back!";
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.right = '20px';
+        toast.style.color = 'white';
+        toast.style.backgroundColor = 'rgba(0, 0, 16)';
+        toast.style.padding = '10px 20px';
+        toast.style.borderRadius = '6px';
+        toast.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+        document.body.appendChild(toast);
 
-    setTimeout(() => {
-        toast.remove();
-    }, 3000);
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
 });
+

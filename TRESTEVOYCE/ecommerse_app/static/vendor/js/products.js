@@ -51,3 +51,7 @@ document.querySelectorAll('.delete-btn').forEach(btn => {
         }
     });
 });
+
+document.getElementById('add-product-btn').addEventListener('click', function() {
+    window.location.href = "{% url 'add_product' %}";
+});

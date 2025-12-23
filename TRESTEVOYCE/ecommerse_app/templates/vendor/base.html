@@ -22,7 +22,7 @@
                 <li><a href="{% url 'products' %}" class="{% if request.path == '/products/' %}active{% endif %}">Products</a></li>
                 <li>
                     <a href="{% url 'orders' %}" class="{% if request.path == '/orders/' %}active{% endif %}">
-                        Orders <span class="badge">3</span>
+                        Orders  {% if pending_orders_count > 0 %}<span class="badge">{{ pending_orders_count }}</span>{% endif %}
                     </a>
                 </li>
                 <li><a href="{% url 'analytics' %}" class="{% if request.path == '/analytics/' %}active{% endif %}">Analytics</a></li>

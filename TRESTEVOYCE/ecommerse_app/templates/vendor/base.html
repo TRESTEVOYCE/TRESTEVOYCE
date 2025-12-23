@@ -45,7 +45,6 @@
 
                 <!-- Welcome and Profile -->
                 <div class="welcome-section">
-                    <div class="welcome">Welcome back!</div>
                     <div class="top-icons">
                         <span class="notification-bell">🔔</span>
                         <span class="user-profile">👤</span>
@@ -54,10 +53,11 @@
             </header>
 
             <!-- Page-specific content -->
-            {% block content %}
-                <!-- Default content: dashboard -->
-                
-            {% endblock %}
+            <section class="page-content">
+                {% block content %}
+                    <!-- Default content: dashboard -->
+                {% endblock %}
+            </section>
         </main>
     </div>
 

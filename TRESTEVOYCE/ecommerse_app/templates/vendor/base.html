@@ -28,7 +28,6 @@
                 <li><a href="{% url 'analytics' %}" class="{% if request.path == '/analytics/' %}active{% endif %}">Analytics</a></li>
                 <li><a href="{% url 'settings' %}" class="{% if request.path == '/settings/' %}active{% endif %}">Settings</a></li>
                 <li><a href="{% url 'notifications' %}" class="{% if request.path == '/notifications/' %}active{% endif %}">Notifications</a></li>
-                <li><a href="{% url 'products' %}">Add Product</a></li>
             </ul>
 
             <form method="POST" action="{% url 'logout' %}">

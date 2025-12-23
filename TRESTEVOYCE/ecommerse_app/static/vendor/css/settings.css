@@ -2,7 +2,7 @@
 .settings-page {
     background: #f4f6f8;
     min-height: 100vh;
-    padding: 50px 30px; /* slightly more top padding for balance */
+    padding: 40px 30px; /* slightly more top padding for balance */
 }
 
 /* WHITE CARD */
@@ -74,7 +74,7 @@
 
 /* Card body */
 .card-body {
-    padding: 30px;
+    padding: 10px 45px;
 }
 
 /* Sections */
@@ -114,7 +114,7 @@
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 32px;
 }
 
 .full-width {
@@ -151,7 +151,7 @@ textarea:enabled {
 .form-grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
-    gap: 16px; /* space between columns and rows */
+    gap: 32px; /* space between columns and rows */
 }
 
 /* Grid for notifications */

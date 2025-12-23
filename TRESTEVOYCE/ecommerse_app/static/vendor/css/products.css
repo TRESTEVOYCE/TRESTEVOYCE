@@ -17,38 +17,31 @@
     margin-bottom: 15px;
 }
 
-/* Search wrapper */
 .search-wrapper {
-    position: relative;
-    width: 200px; /* approx twice the Add Product button width */
+    display: flex;           /* place input and button side by side */
+    align-items: center;     /* vertically align */
+    gap: 0px;                /* space between input and icon */
+    width: 200px;            /* optional width */
 }
 
 /* Search input */
 .search-wrapper input[type="text"] {
-    width: 100%;
-    padding: 8px 35px 8px 12px; /* space for icon */
-    border-radius: 8px;
+    flex: 1;                 /* fill available space */
+    padding: 8px;
     border: 1px solid #ccc;
     font-size: 1rem;
 }
 
 /* Search icon button */
-.search-wrapper .search-icon {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
+.search-wrapper .search-icon {      /* visible button background */
+    border: 1px solid #ccc;
     cursor: pointer;
-    font-size: 1rem;
-    color: #888;
-    padding: 2px 5px;
-    transition: color 0.2s ease;
+    padding: 8px;
+    transition: background 0.2s ease;
 }
 
 .search-wrapper .search-icon:hover {
-    color: #000;
+    background: #ddd;
 }
 
 /* Add Product Button */

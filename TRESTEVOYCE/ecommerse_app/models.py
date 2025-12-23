@@ -85,3 +85,25 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Notification(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    is_read = models.BooleanField(default=False)
+    is_urgent = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def time_since(self):
+        from django.utils.timezone import now
+        delta = now() - self.created_at
+        if delta.days > 0:
+            return f"{delta.days} days ago"
+        elif delta.seconds > 3600:
+            return f"{delta.seconds // 3600} hours ago"
+        elif delta.seconds > 60:
+            return f"{delta.seconds // 60} minutes ago"
+        return "Just now"

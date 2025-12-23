@@ -1,8 +1,13 @@
 {% extends 'vendor/base.html' %}
+{% load static %}
+
+{% block title %}Notifications{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/css/notifications.css' %}">
+{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'vendor/notifications.css' %}">
-
 <div class="notifications-page">
 
     <!-- Notification Summary -->
@@ -12,13 +17,14 @@
             <div class="summary-label">Total</div>
         </div>
         <div class="summary-item">
-            <div class="summary-count" id="unread-count">{{ notifications|filter:"is_read=False"|length }}</div>
+            <div class="summary-count" id="unread-count">{{ unread_count }}</div>
             <div class="summary-label">Unread</div>
         </div>
         <div class="summary-item">
-            <div class="summary-count" id="high-priority-count">{{ notifications|filter:"is_urgent=True"|length }}</div>
+            <div class="summary-count" id="high-priority-count">{{ urgent_count }}</div>
             <div class="summary-label">High Priority</div>
         </div>
+
     </div>
 
     <!-- Notification Controls -->
@@ -58,6 +64,8 @@
     </div>
 
 </div>
+{% endblock %}
 
-<script src="{% static 'vendor/notifications.js' %}"></script>
+{% block extra_js %}
+<script src="{% static 'vendor/js/notifications.js' %}"></script>
 {% endblock %}

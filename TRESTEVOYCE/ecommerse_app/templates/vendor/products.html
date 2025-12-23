@@ -1,64 +1,64 @@
 {% extends 'vendor/base.html' %}
+{% load static %} 
 
 {% block title %}Products Management{% endblock %}
+{% block page_title %}Products Management{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'vendor/css/products.css' %}">
 {% endblock %}
 
 {% block content %}
-<!-- Top Header -->
-<div class="page-header">
-    <h2>Products Management</h2>
-</div>
 
-<!-- Search and Add Product -->
-<div class="actions-bar">
-    <div class="search-wrapper">
-        <input type="text" placeholder="Search products..." id="product-search">
-        <button class="search-icon" id="search-btn">🔍</button>
+<div class="page-content">
+    <!-- Search and Add Product -->
+    <div class="actions-bar">
+        <div class="search-wrapper">
+            <input type="text" placeholder="Search products..." id="product-search">
+            <button class="search-icon" id="search-btn">🔍</button>
+        </div>
+        <button id="add-product-btn">+ Add Product</button>
     </div>
-    <button id="add-product-btn">+ Add Product</button>
+
+    <!-- Products Table -->
+    <section class="products-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Sales</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.category.name }}</td>
+                    <td>${{ product.price }}</td>
+                    <td class="{% if product.stock <= 5 %}low-stock{% endif %}">{{ product.stock }}</td>
+                    <td>{{ product.sales_count }}</td>
+                    <td><span class="status active">Active</span></td>
+                    <td class="actions">
+                        <button class="edit-btn" data-id="{{ product.id }}">✏️</button>
+                        <button class="delete-btn" data-id="{{ product.id }}">🗑️</button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No products available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    {% endblock %}
+
 </div>
-
-<!-- Products Table -->
-<section class="products-table">
-    <table>
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Sales</th>
-                <th>Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category.name }}</td>
-                <td>${{ product.price }}</td>
-                <td class="{% if product.stock <= 5 %}low-stock{% endif %}">{{ product.stock }}</td>
-                <td>{{ product.sales_count }}</td>
-                <td><span class="status active">Active</span></td>
-                <td class="actions">
-                    <button class="edit-btn" data-id="{{ product.id }}">✏️</button>
-                    <button class="delete-btn" data-id="{{ product.id }}">🗑️</button>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="7">No products available.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</section>
-{% endblock %}
-
 {% block extra_js %}
 <script src="{% static 'vendor/js/products.js' %}"></script>
 {% endblock %}

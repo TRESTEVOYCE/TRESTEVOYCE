@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from ecommerse_app import views
 
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('products/', views.products, name='products'),
+    path("products/add/", views.add_product, name="add_product"),
     path('orders/', views.orders, name='orders'),
     path('analytics/', views.analytics, name='analytics'),
     path('settings/', views.setting, name='settings'),

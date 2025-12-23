@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Product, Customer, Order, Notification
+from .models import Product, Customer, Order, Notification, Category
 from django.db.models import Sum
+
 
 # ------------------------
 # AUTHENTICATION VIEWS
@@ -93,7 +94,12 @@ def dashboard(request):
 
 
 def products(request):
-    return render(request, 'vendor/products.html')
+    from django.db.models import Count
+    products = Product.objects.annotate(
+        sales_count=Count('order')
+    ).all()
+    context = {'products': products}
+    return render(request, 'vendor/products.html', context)
 
 
 def orders(request):
@@ -122,3 +128,27 @@ def notifications(request):
     }
     return render(request, 'vendor/notifications.html', context)
 
+
+def add_product(request):
+    categories = Category.objects.all()  # For category dropdown
+
+    if request.method == "POST":
+        # Example: handle form submission
+        name = request.POST.get("name")
+        price = request.POST.get("price")
+        stock = request.POST.get("stock")
+        category_id = request.POST.get("category")
+        category = Category.objects.get(id=category_id)
+
+        # Save product
+        Product.objects.create(
+            name=name,
+            price=price,
+            stock=stock,
+            category=category
+        )
+
+        return redirect("products")  # Redirect back to product list
+
+    context = {"categories": categories}
+    return render(request, "vendor/add_product.html", context)

@@ -22,8 +22,8 @@
   </div>
 
   <ul class="nav-links">
-    <li><a href="#home-top">Home</a></li>
-    <li><a href="#shop-all">Shop</a></li>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'products' %}">Shop</a></li>
     <li><a href="#new-arrivals">New Arrivals</a></li>
     <li><a href="#flash-deals">Sale</a></li>
   </ul>
@@ -121,7 +121,7 @@
     <header class="hero">
         <div class="hero-content">
         <h1>Find it, Love it, <br> Buy it</h1>
-        <button class="btn-shop-now">Shop Now</button>
+        <button class="btn-shop-now"><a class="shop-link" href="{% url 'products' %}">Shop Now</a></button>
         </div>
     </header>
 

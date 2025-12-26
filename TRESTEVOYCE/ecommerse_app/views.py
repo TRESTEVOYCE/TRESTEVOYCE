@@ -7,7 +7,8 @@ from .models import Product
 
 
 def login_view(request):
-    
+
+# Handle POST request for login
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')

@@ -266,7 +266,12 @@ body {
   font-size: 16px;
   text-transform: uppercase;
   transition: 0.3s;
+  border-radius: 10px;
+  
 }
+.shop-link {
+   text-decoration: none;
+  }
 
 .btn-shop-now:hover {
   background: #f0cc85;

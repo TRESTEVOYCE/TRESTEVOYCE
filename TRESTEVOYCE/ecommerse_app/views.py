@@ -1,11 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth import authenticate, login 
+from django.contrib.auth import authenticate, login, logout
+from .models import Product
 
 
 
 def login_view(request):
+    
     if request.method == "POST":
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -14,7 +16,7 @@ def login_view(request):
             username = User.objects.get(email=email).username
         except User.DoesNotExist:
             messages.error(request, "Invalid email or password")
-            return render(request, "customer/login.html")
+            return redirect("customer/login.html")
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -27,6 +29,7 @@ def login_view(request):
 
 def logout_view(request):
     if request.method == "POST":
+         logout(request)
          return redirect('login')
     return render (request,"customer/login.html")
 
@@ -53,3 +56,8 @@ def signup_view(request):
 
 def home_views(request):
     return render(request,"customer/home.html")
+
+def products_view(request):
+    # Fetch all products with related store and inventory
+    products = Product.objects.select_related('store').prefetch_related('inventory').all()
+    return render(request, 'customer/products.html', {'products': products})

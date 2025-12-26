@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Back - Login</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'customer/css/login.css' %}">
+</head>
+<body class="login-page">
+
+<div class="main-container">
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo-box">
+            <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png"
+                 class="logo-icon" alt="Logo">
+        </div>
+        <h1>Welcome Back</h1>
+        <p class="subtitle">Sign in to continue shopping</p>
+    </header>
+
+    <!-- LOGIN CARD -->
+    <main class="login-card">
+        <p class="label">Login as</p>
+
+        <!-- TOGGLE -->
+        <div class="toggle-container">
+            <div class="toggle-option active" id="btn-customer">
+                <span class="role-title">Customer</span>
+                <span class="role-desc">Shop products</span>
+            </div>
+            <div class="toggle-option" id="btn-vendor">
+                <span class="role-title">Vendor</span>
+                <span class="role-desc">Sell products</span>
+            </div>
+        </div>
+
+        <!-- CUSTOMER FORM -->
+        <form id="customer-form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="role" value="customer">
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="password" class="password-input" placeholder="Enter your password" required>
+                    <span class="toggle-password">👁️</span>
+                </div>
+            </div>
+
+            <button type="submit" class="signin-btn">Sign In as Customer</button>
+        </form>
+
+        <!-- VENDOR FORM -->
+        <form id="vendor-form" method="POST" action="{% url 'login' %}" style="display:none;">
+            {% csrf_token %}
+            <input type="hidden" name="role" value="vendor">
+
+            <div class="form-group">
+                <label>Business Email</label>
+                <input type="email" name="email" placeholder="vendor@store.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="password" class="password-input" placeholder="Enter your password" required>
+                    <span class="toggle-password">👁️</span>
+                </div>
+            </div>
+
+            <button type="submit" class="signin-btn">Sign In as Vendor</button>
+        </form>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        Don’t have an account? <a href="{% url 'signup' %}"><strong>Sign up</strong></a>
+    </footer>
+</div>
+
+<!-- JS -->
+<script src="{% static 'customer/javascript/login.js' %}"></script>
+</body>
+</html>

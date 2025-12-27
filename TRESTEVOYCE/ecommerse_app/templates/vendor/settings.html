@@ -1,0 +1,291 @@
+{% extends 'vendor/base.html' %}
+{% load static %}
+
+{% block title %}Vendor Settings{% endblock %}
+{% block page_title %}Vendor Settings{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'vendor/css/settings.css' %}">
+
+<div class="settings-page">
+
+    <!-- Business Information Card -->
+    <div class="vendor-card">
+        <div class="card-header">
+            <h2>
+                <img class="section-icon" width="32" height="32" src="https://img.icons8.com/windows/32/new-store.png" alt="new-store"/>
+                Business Information
+            </h2>
+            <div class="card-actions">
+                <button id="edit-btn" class="btn-outline">Edit</button>
+                <button id="save-btn" class="btn-primary hidden">Save Changes</button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <!-- Profile Section -->
+            <div class="section">
+                <h3>Profile</h3>
+                <div class="profile-wrapper">
+                    <img id="profile-preview" src="{% if vendor.profile_image %}{{ vendor.profile_image.url }}{% else %}{% static 'vendor/img/default-avatar.png' %}{% endif %}">
+                    <input type="file" id="profile-upload" hidden>
+                    <button id="change-photo" class="btn-link hidden">Change Photo</button>
+                </div>
+            </div>
+
+            <!-- Business Info Section -->
+            <div class="section">
+                <h3>Business Information</h3>
+                <div class="form-grid">
+                    <div>
+                        <label>Business Name</label>
+                        <input type="text" value="{{ vendor.business_name }}" disabled>
+                    </div>
+                    <div>
+                        <label>Owner Name</label>
+                        <input type="text" value="{{ vendor.owner_name }}" disabled>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="email" value="{{ vendor.email }}" disabled>
+                    </div>
+                    <div>
+                        <label>Phone</label>
+                        <input type="text" value="{{ vendor.phone }}" disabled>
+                    </div>
+                    <div class="full-width">
+                        <label>Tax ID / EIN</label>
+                        <input type="text" value="{{ vendor.tax_id }}" disabled>
+                    </div>
+                    <div class="full-width">
+                        <label>Description</label>
+                        <textarea disabled>{{ vendor.description }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="section">
+                <h3>Business Address</h3>
+                <div class="form-grid">
+                    <div class="full-width">
+                        <label>Street Address</label>
+                        <input type="text" value="{{ vendor.address.street }}" disabled>
+                    </div>
+                    <div>
+                        <label>City</label>
+                        <input type="text" value="{{ vendor.address.city }}" disabled>
+                    </div>
+                    <div>
+                        <label>State</label>
+                        <input type="text" value="{{ vendor.address.state }}" disabled>
+                    </div>
+                    <div>
+                        <label>ZIP Code</label>
+                        <input type="text" value="{{ vendor.address.zip_code }}" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Settings Card -->
+    <div class="vendor-card">
+        <div class="card-header">
+            <h2>
+                <img class="section-icon" width="24" height="24" src="https://img.icons8.com/material-outlined/24/online-payment-.png" alt="online-payment-">
+                Payment Settings
+            </h2>
+            <div class="card-actions">
+                <button id="edit-payment-btn" class="btn-outline">Edit</button>
+                <button id="save-payment-btn" class="btn-primary hidden">Save Changes</button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="section">
+                <h3>Bank Account Details</h3>
+                <div class="form-grid-2">
+                    <div>
+                        <label>Account Holder Name</label>
+                        <input type="text" value="{{ vendor.bank_account.holder_name }}" disabled>
+                    </div>
+                    <div>
+                        <label>Bank Name</label>
+                        <input type="text" value="{{ vendor.bank_account.bank_name }}" disabled>
+                    </div>
+                    <div>
+                        <label>Account Number</label>
+                        <input type="password" value="{{ vendor.bank_account.account_number }}" disabled>
+                    </div>
+                    <div>
+                        <label>Routing Number</label>
+                        <input type="password" value="{{ vendor.bank_account.routing_number }}" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>PayPal</h3>
+                <div class="form-grid">
+                    <div class="full-width">
+                        <label>PayPal Email</label>
+                        <input type="email" value="{{ vendor.paypal_email }}" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shipping Settings Card -->
+    <div class="vendor-card">
+        <div class="card-header">
+            <h2>
+                <img class="section-icon" width="24" height="24" src="https://img.icons8.com/ios/50/in-transit--v1.png" alt="in-transit--v1"/>
+                Shipping Settings
+            </h2>
+            <div class="card-actions">
+                <button id="edit-shipping-btn" class="btn-outline">Edit</button>
+                <button id="save-shipping-btn" class="btn-primary hidden">Save Changes</button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="section">
+                <div class="form-grid-2">
+                    <div>
+                        <label>Free Shipping Threshold (P)</label>
+                        <input type="text" value="{{ vendor.shipping.free_threshold }}" disabled>
+                    </div>
+                    <div>
+                        <label>Processing Time (days)</label>
+                        <input type="text" value="{{ vendor.shipping.processing_days }}" disabled>
+                    </div>
+                    <div>
+                        <label>Standard Shipping Cost (P)</label>
+                        <input type="text" value="{{ vendor.shipping.standard_cost }}" disabled>
+                    </div>
+                    <div>
+                        <label>Express Shipping Cost (P)</label>
+                        <input type="text" value="{{ vendor.shipping.express_cost }}" disabled>
+                    </div>
+                    <div class="full-width">
+                        <label>Return Window (days)</label>
+                        <input type="text" value="{{ vendor.shipping.return_window }}" disabled>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Preferences Card -->
+
+    <div class="vendor-card">
+
+        <div class="card-header">
+            <h2><img class="section-icon" width="100" height="100" src="https://img.icons8.com/carbon-copy/100/appointment-reminders--v1.png" alt="appointment-reminders--v1"/>Notification Preferences</h2>
+        </div>
+
+        <div class="card-body">
+
+            <div class="section">
+                <div class="notif-grid">
+                    <!-- Each notification option -->
+                    <div class="notif-item">
+                        <div>
+                            <strong>New Orders</strong><br>
+                            <span class="notif-desc">Get notified when you receive a new order</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div>
+                            <strong>Low Stock Alerts</strong><br>
+                            <span class="notif-desc">Receive alerts when products are running low</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div>
+                            <strong>Customer Message</strong><br>
+                            <span class="notif-desc">Get notified of customer inquiries and messages</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div>
+                            <strong>Weekly Sales Reports</strong><br>
+                            <span class="notif-desc">Receive weekly sales performance reports</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                    <div class="notif-item">
+                        <div>
+                            <strong>Product Reviews</strong><br>
+                            <span class="notif-desc">Get notified when customers leave reviews</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Data Management Card -->
+    <div class="vendor-card">
+        <div class="card-header">
+            <h2>
+                <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 50 50">
+                    <path d="M 7 2 L 7 48 L 43 48 L 43 14.59375 L 42.71875 14.28125 L 30.71875 2.28125 L 30.40625 2 Z M 9 4 L 29 4 L 29 16 L 41 16 L 41 46 L 9 46 Z M 31 5.4375 L 39.5625 14 L 31 14 Z M 15 22 L 15 24 L 35 24 L 35 22 Z M 15 28 L 15 30 L 31 30 L 31 28 Z M 15 34 L 15 36 L 35 36 L 35 34 Z"></path>
+                </svg>
+                Data Management
+            </h2>
+        </div>
+
+        <div class="card-body">
+            <div class="section">
+                <div class="data-action">
+                    <div>
+                        <span class="data-title">📤 Export Store Data</span><br>
+                        <span class="data-desc">Download all your products, orders, and customer data</span>
+                    </div>
+                    <button class="btn-primary">Export</button>
+                </div>
+
+                <div class="data-action">
+                    <div>
+                        <span class="data-title">🛑 Close Store</span><br>
+                        <span class="data-desc">Permanently close your store and delete all data</span>
+                    </div>
+                    <button class="btn-danger">Close Store</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="{% static 'vendor/js/settings.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'vendor/base.html' %}
+{% load static %}
+
+{% block title %}Vendor Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/css/dashboard.css' %}">
+{% endblock %}
+
+{% block page_title %}
+Dashboard Overview
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-content">
+        <!-- Metrics Summary Cards -->
+        <section class="metrics">
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <p id="total-revenue">${{ total_revenue }}</p>
+            </div>
+            <div class="card">
+                <h3>Total Orders</h3>
+                <p id="total-orders">{{ total_orders }}</p>
+            </div>
+            <div class="card">
+                <h3>Total Products</h3>
+                <p id="total-products">{{ total_products }}</p>
+            </div>
+            <div class="card">
+                <h3>Customers</h3>
+                <p id="total-customers">{{ total_customers }}</p>
+            </div>
+        </section>
+
+        <!-- Recent Orders Table -->
+        <section class="recent-orders">
+            <h2>Recent Orders</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.customer.name }}</td>
+                        <td>{{ order.product.name }}</td>
+                        <td>${{ order.amount }}</td>
+                        <td>
+                            <span class="status 
+                                {% if order.status == 'Completed' %}
+                                    completed
+                                {% elif order.status == 'Processing' %}
+                                    processing
+                                {% else %}
+                                    shipped
+                                {% endif %}">
+                                {{ order.status }}
+                            </span>
+                        </td>
+                        <td>{{ order.date|date:"Y-m-d" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6">No orders yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        {% endblock %}
+    </div>
+{% block extra_js %}
+<script src="{% static 'vendor/js/dashboard.js' %}"></script>
+{% endblock %}

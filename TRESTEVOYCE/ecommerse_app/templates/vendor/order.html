@@ -1,0 +1,76 @@
+{% extends "vendor/base.html" %}
+{% load static %}
+
+{% block title %}Orders{% endblock %}
+{% block page_title %}Order's List{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'vendor/css/order.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="orders-container">
+
+    <div class="orders-header">
+        <h2>All Orders</h2>
+
+        <div class="order-filters">
+            <button class="filter-btn active" data-status="all">All</button>
+            <button class="filter-btn" data-status="processing">Processing</button>
+            <button class="filter-btn" data-status="shipped">Shipped</button>
+            <button class="filter-btn" data-status="completed">Completed</button>
+        </div>
+    </div>
+
+    <div class="orders-search">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 50 50">
+            <path d="M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z"></path>
+        </svg>
+        <input type="text" id="order-search" placeholder="Search orders...">
+    </div>
+
+
+    <div class="orders-table-wrapper">
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr data-status="{{ order.status|lower }}">
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>{{ order.product_name }}</td>
+                    <td>${{ order.total_amount }}</td>
+                    <td>
+                        <span class="status {{ order.status|lower }}">
+                            {{ order.status }}
+                        </span>
+                    </td>
+                    <td>{{ order.created_at|date:"Y-m-d" }}</td>
+                    <td class="actions">⋮</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="no-data">No orders found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}
+</div>
+
+{% block extra_js %}
+<script src="{% static 'vendor/js/order.js' %}"></script>
+{% endblock %}

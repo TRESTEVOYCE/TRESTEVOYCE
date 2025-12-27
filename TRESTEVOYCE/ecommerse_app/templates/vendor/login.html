@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Back - Login</title>
+    <!-- Correct CSS path -->
+    <link rel="stylesheet" href="{% static 'vendor/css/login.css' %}">
+</head>
+<body class="login-page">
+    <div class="main-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Logo" class="logo-icon">
+            </div>
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Sign in to continue shopping</p>
+        </header>
+
+        <!-- Login Card -->
+        <main class="login-card">
+            <p class="label">Login as</p>
+            <div class="toggle-container">
+                <div class="toggle-option active" id="btn-customer">
+                    <span class="role-title">Customer</span>
+                    <span class="role-desc">Shop products</span>
+                </div>
+                <div class="toggle-option" id="btn-vendor">
+                    <span class="role-title">Vendor</span>
+                    <span class="role-desc">Sell products</span>
+                </div>
+            </div>
+
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p class="error-message">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <form id="login-form" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password-input" name="password" placeholder="Enter your password" required>
+                        <span class="toggle-password" id="toggle-eye">👁️</span>
+                    </div>
+                </div>
+
+                <div class="forgot-link">
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="signin-btn">Sign In</button>
+            </form>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            Don't have an account? <a href="{% url 'signup' %}"><strong>Sign up</strong></a>
+        </footer>
+    </div>
+
+    <!-- Correct JS path -->
+    <script src="{% static 'vendor/js/login.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+/* PAGE BACKGROUND */
+.settings-page {
+    background: #f4f6f8;
+    min-height: 100vh;
+    padding: 40px 30px; /* slightly more top padding for balance */
+}
+
+/* WHITE CARD */
+.vendor-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    max-width: 1000px;
+    margin: 0 auto; /* Center the card */
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Card header */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 25px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #111; /* optional color */
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Buttons */
+.btn-outline {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background: rgb(0, 35, 44);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-outline:hover {
+    background: #f1f1f1;
+    color: rgb(0, 35, 44);
+    
+}
+
+.btn-primary {
+    padding: 8px 16px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Card body */
+.card-body {
+    padding: 10px 45px;
+}
+
+/* Sections */
+.section {
+    margin-bottom: 35px;
+}
+
+.section h3 {
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Profile */
+.profile-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile-wrapper img {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+.btn-link {
+    border: none;
+    background: none;
+    color: #1e5eff;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Form */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+label {
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 9px 10px;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    background: #f1f1f1;
+    font-size: 0.9rem;
+}
+
+textarea {
+    resize: none;
+    height: 85px;
+}
+
+input:enabled,
+textarea:enabled {
+    background: #fff;
+}
+
+/* Two-column form grid specifically for payment fields */
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 equal columns */
+    gap: 32px; /* space between columns and rows */
+}
+
+/* Grid for notifications */
+.notif-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* space between each notification option */
+}
+
+.notif-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.notif-desc {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 26px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #111;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.data-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.data-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.data-desc {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Export Button */
+.btn-primary {
+    padding: 8px 16px;
+    background: #27ae60; /* green background */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-primary:hover {
+    background: #219150; /* darker green on hover */
+}
+
+/* Danger Button */
+.btn-danger {
+    padding: 8px 16px;
+    background: #e74c3c; /* red background */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-danger:hover {
+    background: #c0392b; /* darker red on hover */
+}
+
+/* Labels (above inputs) */
+label {
+    display: block;
+    margin-bottom: 8px; /* space between label and input */
+}
+
+/* Notification descriptions */
+.notif-desc {
+    display: block;
+    line-height: 2;
+}
+
+/* Data management descriptions */
+.data-desc {
+    display: block;
+    line-height: 2;
+}
+
+/* Section spacing (between groups of fields or cards) */
+.section {
+    margin-bottom: 40px; /* increase if you want more space between sections */
+}
+
+.section-icon {
+    width: 30px;          /* width of your SVG */
+    height: 30px;         /* height of your SVG */
+    vertical-align: middle; /* align with text */
+    margin-right: 5px;   /* space between icon and text */
+    fill: #111;           /* optional: color of the SVG */
+}

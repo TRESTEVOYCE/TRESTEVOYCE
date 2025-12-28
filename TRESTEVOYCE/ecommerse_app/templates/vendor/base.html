@@ -19,18 +19,18 @@
             <div class="logo">Vendor Portal</div>
             <ul class="menu">
                 <li><a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard/' %}active{% endif %}">Overview</a></li>
-                <li><a href="{% url 'products' %}" class="{% if request.path == '/products/' %}active{% endif %}">Products</a></li>
+                <li><a href="{% url 'vendor_products' %}" class="{% if request.path == '/products/' %}active{% endif %}">Products</a></li>
                 <li>
-                    <a href="{% url 'orders' %}" class="{% if request.path == '/orders/' %}active{% endif %}">
+                    <a href="{% url 'vendor_orders' %}" class="{% if request.path == '/orders/' %}active{% endif %}">
                         Orders  {% if pending_orders_count > 0 %}<span class="badge">{{ pending_orders_count }}</span>{% endif %}
                     </a>
                 </li>
-                <li><a href="{% url 'analytics' %}" class="{% if request.path == '/analytics/' %}active{% endif %}">Analytics</a></li>
-                <li><a href="{% url 'settings' %}" class="{% if request.path == '/settings/' %}active{% endif %}">Settings</a></li>
-                <li><a href="{% url 'notifications' %}" class="{% if request.path == '/notifications/' %}active{% endif %}">Notifications</a></li>
+                <li><a href="{% url 'vendor_analytics' %}" class="{% if request.path == '/analytics/' %}active{% endif %}">Analytics</a></li>
+                <li><a href="{% url 'vendor_settings' %}" class="{% if request.path == '/settings/' %}active{% endif %}">Settings</a></li>
+                <li><a href="{% url 'vendor_notifications' %}" class="{% if request.path == '/notifications/' %}active{% endif %}">Notifications</a></li>
             </ul>
 
-            <form method="POST" action="{% url 'logout' %}">
+            <form method="POST" action="{% url 'customer_logout' %}">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn"><img class="logout-icon" width="24" height="24" src="https://img.icons8.com/external-febrian-hidayat-basic-outline-febrian-hidayat/24/FFFFFF/external-logout-user-interface-febrian-hidayat-basic-outline-febrian-hidayat.png" alt="external-logout-user-interface-febrian-hidayat-basic-outline-febrian-hidayat"/>Logout</button>
             </form>

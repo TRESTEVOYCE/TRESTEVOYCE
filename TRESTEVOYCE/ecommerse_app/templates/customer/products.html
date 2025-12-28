@@ -20,7 +20,7 @@
 
   <ul class="nav-links">
     <li><a href="{% url 'home' %}">Home</a></li>
-    <li><a href="{% url 'products' %}">Shop</a></li>
+    <li><a href="{% url 'customer_products' %}">Shop</a></li>
     <li><a href="#new-arrivals">New Arrivals</a></li>
     <li><a href="#flash-deals">Sale</a></li>
   </ul>
@@ -71,7 +71,7 @@
         <div class="menu-item"><div><i class="fa-solid fa-headset"></i> Help Center</div> <i class="fa-solid fa-chevron-right"></i></div>
     </div>
 
-    <form method="POST" action="{% url 'logout' %}">
+    <form method="POST" action="{% url 'customer_logout' %}">
         {% csrf_token %}
         <button class="btn-logout" id="logout-btn">Log out</button>
     </form>

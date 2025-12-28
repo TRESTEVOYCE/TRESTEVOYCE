@@ -76,7 +76,8 @@ WSGI_APPLICATION = 'TRESTEVOYCE.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ecommersedb',
+        'NAME': 'ecc'
+        'ommersedb2',
         'USER':'root',
         'PASSWORD':'Kazutokirigaya123!!!',
         'HOST':'localhost',
@@ -129,3 +130,5 @@ MEDIA_ROOT = BASE_DIR/'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'ecommerse_app.User'
+

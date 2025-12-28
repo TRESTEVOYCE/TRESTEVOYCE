@@ -33,39 +33,57 @@
                 {% endfor %}
             </div>
         {% endif %}
-        <form method="post">
-            {% csrf_token %}
+        <form method="POST">
+        {% csrf_token %}
 
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="john@example.com" required>
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="john@example.com" required>
+        </div>
+
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="john_doe" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <div class="password-wrapper">
+                <input type="password" id="password-input" name="password" placeholder="Create a password" required>
+                <span class="toggle-password" id="toggle-eye">👁️</span>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="john_doe" required>
-            </div>
+        <!-- New Store Fields -->
+        <div class="form-group">
+            <label>Store Name</label>
+            <input type="text" name="store_name" placeholder="My Store" required>
+        </div>
 
-            <div class="form-group">
-                <label>Password</label>
-                <div class="password-wrapper">
-                    <input type="password"
-                           id="password-input"
-                           name="password"
-                           placeholder="Create a password"
-                           required>
-                    <span class="toggle-password" id="toggle-eye">👁️</span>
-                </div>
-            </div>
+        <div class="form-group">
+            <label>Contact Number</label>
+            <input type="text" name="contact_number" placeholder="+63 912 345 6789" required>
+        </div>
 
-            <button type="submit" class="signup-btn">Create Account</button>
-        </form>
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" name="address" placeholder="Store address" required>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" name="description" placeholder="Describe your store" required>
+        </div>
+
+        <button type="submit" class="signup-btn">Create Account</button>
+    </form>
+
     </main>
 
     <!-- Footer -->
     <footer class="footer">
         Already have an account?
-        <a href="{% url 'login' %}"><strong>Sign in</strong></a>
+        <a href="{% url 'customer_login' %}"><strong>Sign in</strong></a>
     </footer>
 
 </div>

@@ -223,6 +223,8 @@ body {
   transition: 0.3s;
 }
 
+
+
 /* ==========================================
    HERO SECTION
 ========================================== */
@@ -271,6 +273,7 @@ body {
 }
 .shop-link {
    text-decoration: none;
+   color: #f8f9fa;
   }
 
 .btn-shop-now:hover {

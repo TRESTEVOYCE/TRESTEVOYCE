@@ -11,140 +11,91 @@
 {% block content %}
 <div class="add-product-container">
 
-    <!-- Two-column grid -->
-    <div class="grid-container">
-        <!-- Left Main Column (65%) -->
-        <div class="left-column">
+    <form method="POST" action="{% url 'add_product' %}" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <!-- Product Name Card -->
-            <div class="card">
-                <label>Product Name*</label>
-                <div class="input-with-button">
-                    <input type="text" name="name" placeholder="Detailed description..." required>
-                    <button class="preview-btn">Short Preview</button>
+        <div class="grid-container">
+
+            <!-- Left Column (Main Details) -->
+            <div class="left-column">
+
+                <!-- Product Name -->
+                <div class="card">
+                    <label>Product Name*</label>
+                    <input type="text" name="name" placeholder="Product name..." required>
                 </div>
-            </div>
 
-            <!-- Inventory & SKU Card -->
-            <div class="card">
-                <div class="card-header">📦 Inventory & SKU</div>
-                <div class="row">
-                    <div class="col">
-                        <label>Price*</label>
-                        <div class="input-prefix">
-                            <span>$</span>
-                            <input type="number" step="0.01" name="price" placeholder="0.00" required>
+                <!-- Price & Description -->
+                <div class="card">
+                    <div class="row">
+                        <div class="col">
+                            <label>Price*</label>
+                            <input type="number" name="price" step="0.01" placeholder="0.00" required>
                         </div>
                     </div>
-                    <div class="col">
-                        <label>Barcode (ISBN, UPC, etc.)</label>
-                        <input type="text" name="barcode" placeholder="e.g. 123456789012">
-                    </div>
+                    <label>Description</label>
+                    <textarea name="description" placeholder="Enter product description..."></textarea>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <label>Stock Quantity*</label>
-                        <input type="number" name="stock" placeholder="0" required>
-                    </div>
-                    <div class="col">
-                        <label>Low Stock Threshold</label>
-                        <input type="number" name="low_stock" placeholder="5">
-                        <small>Get notified when stock is low</small>
-                    </div>
-                </div>
+
             </div>
 
-            <!-- Shipping Information Card -->
-            <div class="card">
-                <div class="card-header">🚚 Shipping Information</div>
-                <div class="row">
-                    <div class="col">
-                        <label>Price</label>
-                        <div class="input-prefix">
-                            <span>$</span>
-                            <input type="number" name="shipping_price" placeholder="0.00">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <label>Compare at Price</label>
-                        <div class="input-prefix">
-                            <span>$</span>
-                            <input type="number" name="compare_price" placeholder="0.00">
-                        </div>
-                        <small>Shows customers the original price</small>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col"><label>Weight</label><input type="text" name="weight"></div>
-                    <div class="col"><label>Length</label><input type="text" name="length"></div>
-                    <div class="col"><label>Height</label><input type="text" name="height"></div>
-                </div>
-            </div>
+            <!-- Right Column (Sidebar) -->
+            <div class="right-column">
 
-            <!-- Description Card -->
-            <div class="card">
-                <div class="card-header">📝 Description</div>
-                <textarea name="description" placeholder="Enter detailed product description..."></textarea>
+                <!-- Product Image Drop-zone -->
+                <div class="card">
+                    <div class="card-header">🖼 Product Images</div>
+                    <div class="drop-zone">
+                        <span class="upload-icon">📤</span>
+                        <p>Click to upload images</p>
+                        <input type="file" name="image" style="display:none;">
+                        <small>PNG, JPG up to 10MB</small>
+                    </div>
+                </div>
+
+                <!-- Stock -->
+                <div class="card">
+                    <label>Stock Quantity*</label>
+                    <input type="number" name="stock" placeholder="0" required>
+                </div>
+
+                <!-- Category -->
+                <div class="card">
+                    <label>Category*</label>
+                    <select name="category">
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Tags -->
+                <div class="card">
+                    <label>Tags</label>
+                    <div class="input-with-button">
+                        <input type="text" name="tags" placeholder="Enter tag">
+                        <button type="button" class="add-tag-btn">+</button>
+                    </div>
+                </div>
+
+                <!-- Product Status -->
+                <div class="card">
+                    <label>
+                        <input type="checkbox" name="is_active" checked> Active
+                    </label>
+                </div>
+
             </div>
 
         </div>
 
-        <!-- Right Sidebar Column (35%) -->
-        <div class="right-column">
-
-            <!-- Product Images Card -->
-            <div class="card">
-                <div class="card-header">🖼 Product Images</div>
-                <div class="drop-zone">
-                    <span class="upload-icon">📤</span>
-                    <p>Click to upload images</p>
-                    <small>PNG, JPG up to 10MB</small>
-                </div>
-            </div>
-
-            <!-- Tags Card -->
-            <div class="card">
-                <div class="card-header">🏷 Tags</div>
-                <div class="input-with-button">
-                    <input type="text" name="tags" placeholder="Enter tag">
-                    <button class="add-tag-btn">+</button>
-                </div>
-            </div>
-
-            <!-- Product Status Card -->
-            <div class="card">
-                <div class="card-header">Product Status</div>
-                <div class="toggle-group">
-                    <label>
-                        <input type="checkbox" name="active" checked>
-                        Active <small>Make product visible in store</small>
-                    </label>
-                    <label>
-                        <input type="checkbox" name="featured">
-                        Featured <small>Show in featured section</small>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Category Card -->
-            <div class="card">
-                <div class="card-header">📂 Category</div>
-                <select name="category" required>
-                    {% for category in categories %}
-                        <option value="{{ category.id }}">{{ category.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
+        <!-- Form Footer -->
+        <div class="form-footer">
+            <button type="reset" class="btn-secondary">Discard</button>
+            <button type="submit" class="btn-primary">Add Product</button>
         </div>
-    </div>
 
-    <!-- Footer / Action Bar -->
-    <div class="form-footer">
-        <button type="reset" class="btn-secondary">Discard</button>
-        <button type="button" class="btn-secondary">Schedule</button>
-        <button type="submit" class="btn-primary">Add Product</button>
-    </div>
+    </form>
 
 </div>
 {% endblock %}

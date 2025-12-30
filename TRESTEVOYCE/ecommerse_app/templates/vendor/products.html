@@ -17,7 +17,7 @@
             <input type="text" placeholder="Search products..." id="product-search">
             <button class="search-icon" id="search-btn">🔍</button>
         </div>
-        <button id="add-product-btn">+ Add Product</button>
+        <a href="{% url 'add_product' %}"><button id="add-product-btn">+ Add Product</button></a>
     </div>
 
     <!-- Products Table -->
@@ -60,10 +60,5 @@
 
 </div>
 {% block extra_js %}
-<script src="{% static 'vendor/js/products.js' %}"></script>
-<script>
-document.getElementById('add-product-btn').addEventListener('click', function() {
-    window.location.href = "{% url 'add_product' %}";
-});
-</script>
+<script src="{% static 'vendor/js/product.js' %}"></script>
 {% endblock %}

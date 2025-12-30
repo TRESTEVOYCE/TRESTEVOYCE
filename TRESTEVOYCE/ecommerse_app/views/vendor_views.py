@@ -200,11 +200,8 @@ def products(request):
     return render(request, 'vendor/products.html', {'products': products})
 
 @login_required
-
 def add_product(request):
-    # Try to get the store; if none exists, redirect with a message
     store = Store.objects.filter(owner=request.user).first()
-
     categories = Category.objects.all()
 
     if request.method == "POST":
@@ -213,6 +210,8 @@ def add_product(request):
         stock = request.POST.get("stock")
         category_id = request.POST.get("category")
         description = request.POST.get("description")
+        is_active = request.POST.get("is_active") == "on"
+        image = request.FILES.get("image")  # ✅ handle file upload
 
         # Validate required fields
         if not all([name, price, stock, category_id]):
@@ -231,20 +230,21 @@ def add_product(request):
             name=name,
             description=description,
             price=price,
-            category=category
+            category=category,
+            image=image,           # ✅ save uploaded image
+            is_active=is_active    # ✅ save active status
         )
 
-        # Create inventory entry
+        # Create inventory
         Inventory.objects.create(
             product=product,
-            stock=stock
+            stock=int(stock)       # ✅ convert stock to integer
         )
 
         messages.success(request, "Product added successfully.")
-        return redirect("vendor_products")  # updated to your products page
+        return redirect("vendor_products")
 
     return render(request, "vendor/add_product.html", {"categories": categories})
-
 
 # =========================
 # ORDERS
